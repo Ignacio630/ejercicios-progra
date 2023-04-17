@@ -1,5 +1,5 @@
 import os
-os.system('clear')
+os.system('cls')
 # lista_personas = {"Juan": 20, "Ana": 25, "Pedro": 30, "Luis": 35, "Maria": 40}
 # print(type(lista_personas))
 # for p in lista_personas:
@@ -89,14 +89,19 @@ seguir = "s"
 
 
 while seguir != 'n':
+    
     nombre = input("Ingrese un nombre: ")
     edad = int(input("Ingrese su edad: "))
     altura = float(input("Ingrese su altura en metros: "))
     peso = float(input("Ingrese su peso en kg: "))
     ciudad = input("Ingrese su ciudad: ")
 
+    lista_personas[nombre] = {"edad": edad, "altura": altura, "peso": peso, "ciudad": ciudad}
     seguir = input("Desea seguir? s/n: ").lower()
+    
+    if seguir != 'n' and seguir != 's':
+        print("Error, ingrese una opcion valida")
+        seguir = input("Desea seguir? s/n: ").lower()
 
-
-
-
+for p in lista_personas:
+    print("Nombre: {} Edad: {} Altura: {} Peso: {} Ciudad: {}".format(p.capitalize(),lista_personas[p]["edad"], lista_personas[p]["altura"], lista_personas[p]["peso"], lista_personas[p]["ciudad"].capitalize()))
