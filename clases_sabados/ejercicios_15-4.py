@@ -115,6 +115,7 @@ os.system('cls')
 lista_personas = {}
 seguir = "s"
 while seguir != 'n':
+<<<<<<< HEAD
     nombre = input("Nombre: ")
     edad = int(input("Edad: "))
     altura = float(input("Altura (en metros): "))
@@ -133,3 +134,21 @@ for nombre, datos in lista_personas.items():
     datos["imc"] = round(imc, 2)
     print(f"{nombre}, {datos['ciudad']}, IMC: {datos['imc']}")
     
+=======
+    
+    nombre = input("Ingrese un nombre: ")
+    edad = int(input("Ingrese su edad: "))
+    altura = float(input("Ingrese su altura en metros: "))
+    peso = float(input("Ingrese su peso en kg: "))
+    ciudad = input("Ingrese su ciudad: ")
+
+    lista_personas[nombre] = {"edad": edad, "altura": altura, "peso": peso, "ciudad": ciudad}
+    seguir = input("Desea seguir? s/n: ").lower()
+    
+    if seguir != 'n' and seguir != 's':
+        print("Error, ingrese una opcion valida")
+        seguir = input("Desea seguir? s/n: ").lower()
+
+for p in lista_personas:
+    print("Nombre: {} Edad: {} Altura: {} Peso: {} Ciudad: {}".format(p.capitalize(),lista_personas[p]["edad"], lista_personas[p]["altura"], lista_personas[p]["peso"], lista_personas[p]["ciudad"].capitalize()))
+>>>>>>> 463504778eb73d62a53404ad67cfe6a28611868b
