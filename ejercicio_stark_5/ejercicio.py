@@ -96,7 +96,7 @@ def obtener_nombre_y_dato(dict_heroe, dato_a_obtener):
         resultado = dict_heroe[dato_a_obtener]
         return "{0} | {1}: {2}".format(obtener_nombre(dict_heroe),dato_a_obtener,resultado)
     else:
-        return
+        return 
 
 def stark_imprimir_nombres_alturas(lista_heroes:list):
     if len(lista_heroes) == 0:
@@ -106,8 +106,65 @@ def stark_imprimir_nombres_alturas(lista_heroes:list):
         for heroe in lista_heroes:
             imprimir_dato(obtener_nombre_y_dato(heroe,"altura"))
 
+def calcular_max(lista_heroes, llave):
+    atributo_maximo = 0
+    heroe_maximo = {}
+    if len(lista_heroes) == 0:
+        print("La lista esta vacia")
+    else:
+        for heroe in lista_heroes:
+            if heroe[llave] > atributo_maximo:
+                atributo_maximo = heroe[llave]
+                heroe_maximo = heroe
+        return heroe_maximo
+            
+def calcular_max(lista_heroes, llave):
+    atributo_maximo = 0
+    heroe_maximo = {}
+    if len(lista_heroes) == 0:
+        print("La lista esta vacia")
+    else:
+        for heroe in lista_heroes:
+            if heroe[llave] > atributo_maximo:
+                atributo_maximo = heroe[llave]
+                heroe_maximo = heroe
+        return heroe_maximo
 
 
+def calcular_min(lista_heroes, llave):
+    atributo_minimo = float('inf')
+    heroe_minimo = {}
+    if len(lista_heroes) == 0:
+        print("La lista esta vacia")
+    else:
+        for heroe in lista_heroes:
+            if heroe[llave] < atributo_minimo:
+                atributo_minimo = heroe[llave]
+                heroe_minimo = heroe
+        return heroe_minimo
+
+def calcular_max_min_dato(lista_heroe,valor,atributo):
+    if len(lista_heroe) == 0:
+        print("La lista esta vacia")
+    else:
+        if valor.lower() == "maximo":
+            return calcular_max(lista_heroe,atributo)
+        elif valor.lower() == "minimo":
+            return calcular_min(lista_heroe,atributo)
+        else:
+            print("El valor ingresado no es correcto")
+            return -1
+
+def stark_calcular_imprimir_heroe(lista_heroes,valor,atributo):
+    if len(lista_heroes) == 0:
+        print("La lista esta vacia")
+    else:
+        if atributo == "altura" or atributo == "peso" or atributo == "fuerza":
+            resultado_heroe = calcular_max_min_dato(lista_heroes,valor,atributo)
+            imprimir_dato(obtener_nombre_y_dato(resultado_heroe,atributo))
+        else:
+            print("El dato ingresado no es valido")
+        
 lista_heroes_normalizada = []
 
 while True:
@@ -137,13 +194,34 @@ while True:
         case "5":
             stark_imprimir_nombres_alturas(lista_heroes_normalizada)
         case "6":
-            pass
+            dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
+                        
+            if dato_a_obtener.lower() == "altura" or dato_a_obtener.lower() == "peso" or dato_a_obtener.lower() == "fuerza":
+                resultado_heroe = calcular_max(lista_heroes_normalizada,dato_a_obtener)
+                imprimir_dato(obtener_nombre_y_dato(resultado_heroe,dato_a_obtener))
+            else:
+                print("El dato ingresado no es valido")
         case "7":
-            pass
+            dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
+            dato_a_obtener.lower()    
+            if dato_a_obtener == "altura" or dato_a_obtener == "peso" or dato_a_obtener == "fuerza":
+                resultado_heroe = calcular_min(lista_heroes_normalizada,dato_a_obtener)
+                imprimir_dato(obtener_nombre_y_dato(resultado_heroe,dato_a_obtener))
+            else:
+                print("El dato ingresado no es valido")
         case "8":
-            pass
+            valor_deseado = input("Que calculo desea hacer? minimo/maximo: ")
+            dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
+            if dato_a_obtener == "altura" or dato_a_obtener == "peso" or dato_a_obtener == "fuerza":
+                resultado_heroe = calcular_max_min_dato(lista_heroes_normalizada,valor_deseado,dato_a_obtener)
+                imprimir_dato(obtener_nombre_y_dato(resultado_heroe,dato_a_obtener))
+            else:
+                print("El dato ingresado no es valido")
         case "9":
-            pass
+            valor_deseado = input("Que calculo desea hacer? minimo/maximo: ")
+            dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
+            
+            stark_calcular_imprimir_heroe(lista_heroes_normalizada,valor_deseado,dato_a_obtener)
         case "10":
             pass
         case "11":
@@ -158,7 +236,7 @@ while True:
             pass
         case "cc":
             os.system("cls")
-        case "17":
+        case "16":
             print("Saliendo...")
             break
         case _:
