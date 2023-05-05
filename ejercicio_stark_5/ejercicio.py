@@ -79,8 +79,13 @@ def stark_imprimir_nombres_heroes(lista_heroes):
             imprimir_dato(obtener_nombre(heroe))
 
 """
+    Mostrar el nombre y el dato que se paso por parametro
+    
     Parametros:
+    heroe(dict): El heroe del cual se obtendra el dato
+    dato(str): El dato que se desea obtener del heroe
     Devolver:
+    
 """
 
 
@@ -93,16 +98,18 @@ def obtener_nombre_y_dato(dict_heroe, dato_a_obtener):
     else:
         return
 
-
-
-
-
-
-
+def stark_imprimir_nombres_alturas(lista_heroes:list):
+    if len(lista_heroes) == 0:
+        print("La lista ingresada se encuentra vacia")
+        return -1
+    else:
+        for heroe in lista_heroes:
+            imprimir_dato(obtener_nombre_y_dato(heroe,"altura"))
 
 
 
 lista_heroes_normalizada = []
+
 while True:
     print("1-Imprimir superhereos Masculinos\n2-Imprimir superhereos Femeninos\n3-Imprimir superhereos Masculinos\n4-Limpiar consola\n5-Salir")
     opcion = input("Ingrese opcion: ")
@@ -119,6 +126,7 @@ while True:
             stark_imprimir_nombres_heroes(lista_heroes_normalizada)
         case "4":
             nro_heroe = int(input("Ingrese el numero de heroe: "))
+            # print(lis)
             heroe_elegido = lista_heroes_normalizada[nro_heroe]
             dato_a_obtener = input("Ingrese el dato a obtener del heroe: ")
             
@@ -127,7 +135,7 @@ while True:
             else:
                 print("El heroe o el atributo a mostrar no existe:")
         case "5":
-            pass
+            stark_imprimir_nombres_alturas(lista_heroes_normalizada)
         case "6":
             pass
         case "7":
@@ -148,7 +156,7 @@ while True:
             pass
         case "15":
             pass
-        case "16":
+        case "cc":
             os.system("cls")
         case "17":
             print("Saliendo...")
