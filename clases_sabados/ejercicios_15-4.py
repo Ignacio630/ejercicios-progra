@@ -1,5 +1,5 @@
 import os
-os.system('clear')
+os.system('cls')
 # lista_personas = {"Juan": 20, "Ana": 25, "Pedro": 30, "Luis": 35, "Maria": 40}
 # print(type(lista_personas))
 # for p in lista_personas:
@@ -84,19 +84,52 @@ os.system('clear')
 # for p in lista_personas:
 #     print("Nombre: {} Edad: {}".format(p.capitalize(),lista_personas[p]))
 
+# lista_personas = {}
+# seguir = "s"
+
+
+# while seguir != 'n':
+#     lista_personas["nombre"] = input("Ingrese un nombre: ")
+#     lista_personas["edad"] = int(input("Ingrese su edad: "))
+#     lista_personas["altura"] = float(input("Ingrese su altura en metros: "))
+#     lista_personas["peso"] = float(input("Ingrese su peso en kg: "))
+#     lista_personas["ciudad"] = input("Ingrese su ciudad: ")
+
+    
+#     seguir = input("Desea seguir? s/n: ").lower()
+
+#     if seguir != 'n' or seguir != 's':
+#         seguir = input("Error dato incorrecto, Desea seguir? s/n: ").lower()
+
+
+# for p in lista_personas:
+#     print(lista_personas[p].capitalize())
+
+
+#  Crear un diccionario que contenga los nombres, edades, alturas (en metros), pesos (en
+# kilogramos) y ciudades de un numero indeterminados de personas. Luego calcular el
+# indice de masa corporal (IMC) de cada persona y agregarlo al diccionario. Finalmente,
+# imprimir en pantalla los nombres de las personas junto con su ciudad y si IMC
+# (redondeando a 2 decimales).
+
 lista_personas = {}
 seguir = "s"
-
-
 while seguir != 'n':
-    nombre = input("Ingrese un nombre: ")
-    edad = int(input("Ingrese su edad: "))
-    altura = float(input("Ingrese su altura en metros: "))
-    peso = float(input("Ingrese su peso en kg: "))
-    ciudad = input("Ingrese su ciudad: ")
+    nombre = input("Nombre: ")
+    edad = int(input("Edad: "))
+    altura = float(input("Altura (en metros): "))
+    peso = float(input("Peso (en kilogramos): "))
+    ciudad = input("Ciudad: ")
+    
+    lista_personas[nombre] = {"edad": edad, "altura": altura, "peso": peso, "ciudad": ciudad}
 
-    seguir = input("Desea seguir? s/n: ").lower()
-
-
-
-
+    respuesta = input("¿Desea agregar información de una nueva persona? (s/n): ")
+    if respuesta.lower() == "n":
+        break
+for nombre, datos in lista_personas.items():
+    peso = datos["peso"]
+    altura = datos["altura"]
+    imc = peso / altura**2
+    datos["imc"] = round(imc, 2)
+    print(f"{nombre}, {datos['ciudad']}, IMC: {datos['imc']}")
+    
