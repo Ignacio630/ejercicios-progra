@@ -176,12 +176,17 @@ def dividir(dividendo:int,divisor:int)-> int:
     else:
         return dividendo/divisor
 
-def calcular_promedio(lista_heroes:list, dato:str)->float:
-    if not validar_lista(lista_heroes):
+def calcular_promedio(lista:list, dato_a_obtener:str)->float:
+    contador = 0
+    if not validar_lista(lista):
         return -1
     else:
-        
-        
+        for datos in lista:
+            if isinstance(datos[dato_a_obtener],int) or isinstance(datos[dato_a_obtener],float):
+                contador += 1
+            else:
+                return -1
+        return sumar_dato_heroe(lista,dato_a_obtener) / float(contador)
 lista_heroes_normalizada = []
 
 while True:
@@ -246,7 +251,13 @@ while True:
             resultado = sumar_dato_heroe(lista_heroes_normalizada,dato_a_obtener)
             print("La suma de {0} es {1:.2f}".format(dato_a_obtener, resultado))
         case "11":
-            pass
+            dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
+            
+            resultado = calcular_promedio(lista_heroes_normalizada,dato_a_obtener)
+            if resultado == -1:
+                print("El dato ingresado no es un numero")
+            else:
+                print("El promedio de {0} es {1:.2f}".format(dato_a_obtener, resultado))
         case "12":
             pass
         case "13":
