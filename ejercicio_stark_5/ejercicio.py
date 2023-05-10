@@ -18,7 +18,7 @@ os.system("cls")
     Devolver:
     (list): Lista de heroes con los valores formateados
 """
-def stark_normalizar_datos(lista_heroes):
+def stark_normalizar_datos(lista_heroes:list)-> list:
     flag_normalizado = False
     if len(lista_heroes) == 0:
         return print("Error: Lista de héroes vacía")
@@ -40,7 +40,7 @@ def stark_normalizar_datos(lista_heroes):
     Devolver:
     (string): Devuelve el nombre del heroe pasado por parametro
 """
-def obtener_nombre(dict_heroe):
+def obtener_nombre(dict_heroe:dict)-> str:
     
     if len(dict_heroe) == 0:
         print("Se ingreso un diccionario vacio")
@@ -53,13 +53,14 @@ def obtener_nombre(dict_heroe):
     Parametros:
     strign(str): string que se va a imprimir
     Devolver:
-    (str): imprime el string pasado por parametros  
+    (): imprime el string pasado por parametros  
 """
-def imprimir_dato(string):
+def imprimir_dato(string:str):
     if type(string) == str:
         print(string)
     else:
         print("No se paso por parametro un string")
+
 
 """
     Listar los nombres de todos los heroes de la lista
@@ -67,8 +68,7 @@ def imprimir_dato(string):
     Parametros:
     lista_heroes(list): Recibe la lista de personajes
     Devolver:
-    Imprime los datos pasados por parametro
-    Retorna(int): -1
+    retorna(int): -1 
 """
 def stark_imprimir_nombres_heroes(lista_heroes):
     if len(lista_heroes) == 0:
@@ -89,7 +89,7 @@ def stark_imprimir_nombres_heroes(lista_heroes):
 """
 
 
-def obtener_nombre_y_dato(dict_heroe, dato_a_obtener):
+def obtener_nombre_y_dato(dict_heroe:dict, dato_a_obtener:str):
     resultado = ""
     
     if dato_a_obtener in dict_heroe:
@@ -118,18 +118,6 @@ def calcular_max(lista_heroes, llave):
                 heroe_maximo = heroe
         return heroe_maximo
             
-def calcular_max(lista_heroes, llave):
-    atributo_maximo = 0
-    heroe_maximo = {}
-    if len(lista_heroes) == 0:
-        print("La lista esta vacia")
-    else:
-        for heroe in lista_heroes:
-            if heroe[llave] > atributo_maximo:
-                atributo_maximo = heroe[llave]
-                heroe_maximo = heroe
-        return heroe_maximo
-
 
 def calcular_min(lista_heroes, llave):
     atributo_minimo = float('inf')
@@ -158,12 +146,41 @@ def calcular_max_min_dato(lista_heroe,valor,atributo):
 def stark_calcular_imprimir_heroe(lista_heroes,valor,atributo):
     if len(lista_heroes) == 0:
         print("La lista esta vacia")
+        return -1
     else:
         if atributo == "altura" or atributo == "peso" or atributo == "fuerza":
             resultado_heroe = calcular_max_min_dato(lista_heroes,valor,atributo)
             imprimir_dato(obtener_nombre_y_dato(resultado_heroe,atributo))
         else:
             print("El dato ingresado no es valido")
+# Crear la función 'sumar_dato_heroe' la cual recibirá como parámetro una lista de héroes y un string que representara el dato/key de los héroes que se requiere sumar. 
+# Validar que cada héroe sea tipo diccionario y que no sea un diccionario vacío antes de hacer la suma. 
+# La función deberá retorna la suma de todos los datos según la key pasada por parámetro
+
+def sumar_dato_heroe(lista_heroe:list,dato:str)-> float:
+    acumulador_dato = 0
+    if len(lista_heroe) == 0:
+        print("Lista vacia")
+    else:
+        for heroe in lista_heroe:
+            if type(heroe) != dict:
+                print("El heroe ingresado no es un diccionario")
+            else:
+                acumulador_dato += heroe[dato]
+        return acumulador_dato
+
+def dividir(dividendo:int,divisor:int)-> int:
+    if divisor == 0:
+        print("No se puede dividir por 0 :)")
+        return 0
+    else:
+        return dividendo/divisor
+
+def calcular_promedio(lista_heroes:list, dato:str)->float:
+    if not validar_lista(lista_heroes):
+        return -1
+    else:
+        
         
 lista_heroes_normalizada = []
 
@@ -218,12 +235,16 @@ while True:
             else:
                 print("El dato ingresado no es valido")
         case "9":
+            # valor_deseado = input("Que calculo desea hacer? minimo/maximo: ")
             valor_deseado = input("Que calculo desea hacer? minimo/maximo: ")
             dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
             
             stark_calcular_imprimir_heroe(lista_heroes_normalizada,valor_deseado,dato_a_obtener)
         case "10":
-            pass
+            dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
+            
+            resultado = sumar_dato_heroe(lista_heroes_normalizada,dato_a_obtener)
+            print("La suma de {0} es {1:.2f}".format(dato_a_obtener, resultado))
         case "11":
             pass
         case "12":
