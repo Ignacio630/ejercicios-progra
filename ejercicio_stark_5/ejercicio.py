@@ -56,11 +56,10 @@ def obtener_nombre(dict_heroe:dict)-> str:
     (): imprime el string pasado por parametros  
 """
 def imprimir_dato(string:str):
-    if type(string) == str:
+    if isinstance(string,str):
         print(string)
     else:
         print("No se paso por parametro un string")
-
 
 """
     Listar los nombres de todos los heroes de la lista
@@ -186,36 +185,88 @@ def calcular_promedio(lista:list, dato_a_obtener:str)->float:
                 contador += 1
             else:
                 return -1
-        return sumar_dato_heroe(lista,dato_a_obtener) / float(contador)
+        return dividir(sumar_dato_heroe(lista,dato_a_obtener),contador)
+
+def imprimir_menu():
+    imprimir_dato("_________________________________")
+    imprimir_dato("| 1- Normalizar lista\t\t|")
+    imprimir_dato("| 2- Obtener nombre heroe\t|")
+    imprimir_dato("| 3- Imprimir nombres heroes\t|")
+    imprimir_dato("| 4- Obtener dato heroe\t\t|")
+    imprimir_dato("| 5- Imprimir nombre alturas\t|")
+    imprimir_dato("| 6- Calcular maximo\t\t|")
+    imprimir_dato("| 7- Calcular minimo\t\t|")
+    imprimir_dato("| 8- Calcular maximo minimo\t|")
+    imprimir_dato("| 9- Calcular imprimir heroes\t|")
+    imprimir_dato("| 10- Sumar dato heroe\t\t|")
+    imprimir_dato("| 11- Calcular promedio\t\t|")
+    imprimir_dato("| 12- Salir\t\t\t|")
+    imprimir_dato("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯")
+
+def validar_entero(cadena:str="")-> int:
+    if type(cadena) != str and type(cadena) != int:
+        return False
+        
+    else: 
+        if type(cadena) == int or cadena.isdigit():
+            return True
+        else:
+            return False
+
+def stark_menu_principal():
+    imprimir_menu()
+    opcion = input("|-> Ingrese una opcion: ")
+    print("")
+    if validar_entero(opcion):
+        return int(opcion)
+    else:
+        return -1
+
+
+def stark_marvel_app():
+
 lista_heroes_normalizada = []
 
 while True:
-    print("1-Imprimir superhereos Masculinos\n2-Imprimir superhereos Femeninos\n3-Imprimir superhereos Masculinos\n4-Limpiar consola\n5-Salir")
-    opcion = input("Ingrese opcion: ")
+    opcion = stark_menu_principal()
+
     match opcion:
-        case "1":
+        case 1:
             lista_heroes_normalizada = stark_normalizar_datos(lista_personajes)
             print("Lista normaliada..")
-        case "2":
-            nro_heroe = int(input("Ingrese el numero de heroe: "))
-            heroe_elegido = lista_heroes_normalizada[nro_heroe]
-            nombre_heroe = obtener_nombre(heroe_elegido)
-            imprimir_dato(nombre_heroe)
-        case "3":
-            stark_imprimir_nombres_heroes(lista_heroes_normalizada)
-        case "4":
-            nro_heroe = int(input("Ingrese el numero de heroe: "))
-            # print(lis)
-            heroe_elegido = lista_heroes_normalizada[nro_heroe]
-            dato_a_obtener = input("Ingrese el dato a obtener del heroe: ")
-            
-            if obtener_nombre_y_dato(heroe_elegido,dato_a_obtener):
-                imprimir_dato(obtener_nombre_y_dato(heroe_elegido,dato_a_obtener))
+        case 2:
+            if len(lista_heroes_normalizada) == 0:
+                print("La lista esta vacia")
             else:
-                print("El heroe o el atributo a mostrar no existe:")
-        case "5":
+                nro_heroe = input("Ingrese el numero de heroe: ")
+                if validar_entero(nro_heroe):
+                    nro_heroe = int(nro_heroe)
+                    heroe_elegido = lista_heroes_normalizada[nro_heroe]
+                    nombre_heroe = obtener_nombre(heroe_elegido)
+                    imprimir_dato(nombre_heroe)
+                else:
+                    print("El numero ingresado no es valido")
+        case 3:
+            stark_imprimir_nombres_heroes(lista_heroes_normalizada)
+        case 4:
+            if len(lista_heroes_normalizada) == 0:
+                print("La lista esta vacia")
+            else:
+                nro_heroe = input("Ingrese el numero de heroe: ")
+                if validar_entero(nro_heroe):
+                    nro_heroe = int(nro_heroe)
+                    heroe_elegido = lista_heroes_normalizada[nro_heroe]
+                    dato_a_obtener = input("Ingrese el dato a obtener del heroe: ")
+                    
+                    if obtener_nombre_y_dato(heroe_elegido,dato_a_obtener):
+                        imprimir_dato(obtener_nombre_y_dato(heroe_elegido,dato_a_obtener))
+                    else:
+                        print("El heroe o el atributo a mostrar no existe:")
+                else:
+                    print("El numero ingresado no es valido")
+        case 5:
             stark_imprimir_nombres_alturas(lista_heroes_normalizada)
-        case "6":
+        case 6:
             dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
                         
             if dato_a_obtener.lower() == "altura" or dato_a_obtener.lower() == "peso" or dato_a_obtener.lower() == "fuerza":
@@ -223,7 +274,7 @@ while True:
                 imprimir_dato(obtener_nombre_y_dato(resultado_heroe,dato_a_obtener))
             else:
                 print("El dato ingresado no es valido")
-        case "7":
+        case 7:
             dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
             dato_a_obtener.lower()    
             if dato_a_obtener == "altura" or dato_a_obtener == "peso" or dato_a_obtener == "fuerza":
@@ -231,7 +282,7 @@ while True:
                 imprimir_dato(obtener_nombre_y_dato(resultado_heroe,dato_a_obtener))
             else:
                 print("El dato ingresado no es valido")
-        case "8":
+        case 8:
             valor_deseado = input("Que calculo desea hacer? minimo/maximo: ")
             dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
             if dato_a_obtener == "altura" or dato_a_obtener == "peso" or dato_a_obtener == "fuerza":
@@ -239,18 +290,18 @@ while True:
                 imprimir_dato(obtener_nombre_y_dato(resultado_heroe,dato_a_obtener))
             else:
                 print("El dato ingresado no es valido")
-        case "9":
+        case 9:
             # valor_deseado = input("Que calculo desea hacer? minimo/maximo: ")
             valor_deseado = input("Que calculo desea hacer? minimo/maximo: ")
             dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
             
             stark_calcular_imprimir_heroe(lista_heroes_normalizada,valor_deseado,dato_a_obtener)
-        case "10":
+        case 10:
             dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
             
             resultado = sumar_dato_heroe(lista_heroes_normalizada,dato_a_obtener)
             print("La suma de {0} es {1:.2f}".format(dato_a_obtener, resultado))
-        case "11":
+        case 11:
             dato_a_obtener = input("Ingresar el dato del heroe que desea calcular: ")
             
             resultado = calcular_promedio(lista_heroes_normalizada,dato_a_obtener)
@@ -258,19 +309,11 @@ while True:
                 print("El dato ingresado no es un numero")
             else:
                 print("El promedio de {0} es {1:.2f}".format(dato_a_obtener, resultado))
-        case "12":
-            pass
-        case "13":
-            pass
-        case "14":
-            pass
-        case "15":
-            pass
-        case "cc":
-            os.system("cls")
-        case "16":
+        case 12:
             print("Saliendo...")
             break
+        case 13:
+            os.system("cls")
         case _:
             print("Opción inválida")
             pass
