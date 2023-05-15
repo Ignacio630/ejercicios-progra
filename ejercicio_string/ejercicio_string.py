@@ -1,3 +1,5 @@
+import os
+os.system("cls")
 # Escribir una función que reciba un string y devuelva el mismo string todo en mayúsculas.
 
 # def a_mayuscula(texto:str)-> str:
@@ -112,20 +114,32 @@
 # Escribir una función que tome un número de tarjeta de crédito como input, verificar que todos los caracteres sean numéricos y devolver los últimos cuatro dígitos y los primeros dígitos como asteriscos, por ejemplo: "**** **** **** 1234". 
 
 
-def ocultar_numero(numeros:str)-> str:
-        if numeros.isnumeric():
-            print(numeros.split("z"))
-            return numeros.replace(numeros,"*") + " " + numeros[-4:]
-        else:
-            return "Error, ingrese un numeor"
+# def ocultar_numero(numeros:str)-> str:
+#     retorno = ""
+#     if numeros.isnumeric() or len(numeros) == 16:
+#         retorno = "**** **** **** " + numeros[-4:]
+#     else:
+#         retorno = "Error, lo ingresado no son numeros o su longitud no es de  "
     
+#     return retorno
 
-numero = input("Ingrese los numeros de su tarjeta: ")
-print(ocultar_numero(numero))
+# numero = input("Ingrese los numeros de su tarjeta: ")
+# print(ocultar_numero(numero))
+
 # Escribir una función que tome un correo electrónico y elimine cualquier carácter después del símbolo @, por ejemplo: "usuario@gmail.com" -> "usuario".
+
+# def eliminar_mail(correo:str)-> str:
+#     return correo.split("@")[0]
+
+# print(eliminar_mail("i.medici@utn-fra.com"))
 
 # Escribir una función que tome una URL y devuelva solo el nombre de dominio, por ejemplo: "https://www.ejemplo.com.ar/pagina1" -> "ejemplo"..
 
+def eliminar_dominio(url:str)-> str:
+    return url.split("/")[2]
+
+
+print(eliminar_dominio("https://www.ejemplo.com.ar/pagina1"))
 # Escribir una función que tome una cadena de texto y devuelva solo los caracteres alfabéticos, eliminando cualquier número o símbolo (sólo son válidos letras y espacios), por ejemplo: "H0l4, m4nd0!" -> "Hl mnd”
 
 # Escribir una función que tome una cadena de texto y la convierta en un acrónimo, tomando la primera letra de cada palabra, por ejemplo: "Universidad Tecnológica Nacional Facultad Regional Avellaneda" -> "UTNFRA”.
