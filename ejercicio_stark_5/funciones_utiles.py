@@ -1,9 +1,18 @@
 def get_str(mensaje:str):
-    retorno = 0
-    dato = input("Mensaje")
-    if mensaje == '' or isinstance(mensaje,str) != True and isinstance(dato,str) != True:
-        retorno = -1
-    elif :
-        
+    retorno_str = -1
+    while retorno_str == -1:
+        if isinstance(mensaje,str) != True or len(mensaje) == 0:
+            retorno_str = "No se ingreso un parametro valido"
+            break
+        else:
+            dato = input(mensaje)
+            
+            if dato.isalpha():
+                retorno_str = dato.lower()
+                break
     
-    return retorno
+    return retorno_str
+
+dato = get_str("Dato: ")
+
+print(dato)

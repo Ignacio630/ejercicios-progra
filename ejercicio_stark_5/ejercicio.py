@@ -6,16 +6,17 @@ os.system("cls")
 lista_heroes_normalizada = []
 
 
-"""
+
+def stark_normalizar_datos(lista_heroes:list)-> list:
+    """
     Normalizar los datos de la lista de heroes con los datos correspondientes
     
     Parametro:
     lista_heroes(list): lista de heroes
-    
+ 
     Devolver:
-    (list): Lista de heroes con los valores formateados
-"""
-def stark_normalizar_datos(lista_heroes:list)-> list:
+    (list): Lista de heroes con los valores formateados   
+    """
     flag_normalizado = False
     if len(lista_heroes) == 0:
         return print("Error: Lista de héroes vacía")

@@ -43,7 +43,7 @@ os.system("cls")
 # caracter = input("Caracter: ")
 # print(contar_caracteres(texto, caracter))
 
-
+ 
 # def contar_caracteres(texto:str, caracter:str)-> list:
 # Escribir una función que tome un string y un carácter y devuelva una lista con todas las palabras en el string que contienen ese carácter.
 #     lista = []
@@ -135,18 +135,46 @@ os.system("cls")
 
 # Escribir una función que tome una URL y devuelva solo el nombre de dominio, por ejemplo: "https://www.ejemplo.com.ar/pagina1" -> "ejemplo"..
 
-def eliminar_dominio(url:str)-> str:
-    return url.split("/")[2]
+# def eliminar_dominio(url:str)-> str:
+#     return url.split(".")[1]
 
+# resultado = eliminar_dominio("https://www.youtube.com/")
 
-print(eliminar_dominio("https://www.ejemplo.com.ar/pagina1"))
+# print("El dominio de la url ingresada es: {0}".format(resultado))
+
 # Escribir una función que tome una cadena de texto y devuelva solo los caracteres alfabéticos, eliminando cualquier número o símbolo (sólo son válidos letras y espacios), por ejemplo: "H0l4, m4nd0!" -> "Hl mnd”
+
+# def eliminar_simbolos_y_numeros(texto:str)-> str:
+#     texto_formateado = ""
+#     for caracter in texto:
+#         if caracter.isalpha() or caracter.isspace():
+#             texto_formateado += caracter
+#     return texto_formateado
+        
+# resultado = eliminar_simbolos_y_numeros("Hol@ como 3st@s?!")
+
+# print(resultado)
 
 # Escribir una función que tome una cadena de texto y la convierta en un acrónimo, tomando la primera letra de cada palabra, por ejemplo: "Universidad Tecnológica Nacional Facultad Regional Avellaneda" -> "UTNFRA”.
 
+# def acronimos_texto(texto:str)-> str:
+#     texto_separado = texto.split(" ")
+#     texto_retornado = ""
+#     for text in texto_separado:
+#         texto_retornado += text.capitalize()[0]
+#     return texto_retornado
+
+# texto_completo = "Universidad Tecnológica Nacional Facultad Regional Avellaneda"
+# resultado = acronimos_texto(texto_completo)
+    
+# print("El acronimo de ""{0}"" es: {1}".format(texto_completo,resultado))
+
 # Escribir una función que tome un número binario y lo convierta en una cadena de 8 bits, rellenando con ceros a la izquierda si es necesario, por ejemplo: "101" -> "00000101".
 
-
+def rellenar_binario(nro_binario:str)-> str:
+    ceros = "0"* (8 - len(nro_binario))
+    return ceros + nro_binario
+print(rellenar_binario("101"))
 # Escribir una función que tome una cadena de caracteres y reemplace todas las letras mayúsculas por letras minúsculas y todas las letras minúsculas por letras mayúsculas, por ejemplo: "HoLa" -> "hOlA"
 
 
