@@ -1,187 +1,231 @@
 import os
+from funciones_utiles import *
 os.system("cls")
-# Escribir una función que reciba un string y devuelva el mismo string todo en mayúsculas.
 
-# def a_mayuscula(texto:str)-> str:
-#     return texto.upper()
+#1
+def a_mayuscula(texto:str)-> str:
+    return texto.upper()
 
-# texto = input("Texto: ")
+#2
+def a_minuscula(texto:str)-> str:
+    return texto.lower()
 
-# print(a_mayuscula(texto))
+#3
+def concatenar(texto1:str, texto2:str)-> str:
+    return texto1 + " " + texto2
 
-# Escribir una función que reciba un string y devuelva el mismo string todo en minúsculas.
+#4
+def contar_caracteres(texto:str)-> int:
+    return len(texto)
 
-# def a_minuscula(texto:str)-> str:
-#     return texto.lower()
+#5
+def contar_caracteres_recurrentes(texto:str, caracter:str)-> int:
 
-# texto = input("Texto: ")
+    return texto.count(caracter)
 
-# print(a_minuscula(texto))
+#6 
+def palabras_contenidas(texto:str, caracter:str)-> list:
+    lista = []
+    for palabra in texto.split():
+        if caracter in palabra:
+            lista.append(palabra)
+    return lista
 
-# Escribir una función que tome dos strings y devuelva un nuevo string que contenga ambos strings concatenados, separados por un espacio.
+#7
+def eliminar_espacios(texto:str)-> str:
+    return texto.replace(" ", "")
 
-# def concatenar(texto1:str, texto2:str)-> str:
-#     return texto1 + " " + texto2
-# texto1 = input("Texto 1: ")
-# texto2 = input("Texto 2: ")
-# print(concatenar(texto1, texto2))
-
-# Escribir una función que tome un string y devuelva el número de caracteres que tiene el string.
-
-# def contar_caracteres(texto:str)-> int:
-#     return len(texto)
-# texto = input("Texto: ")
-# print(contar_caracteres(texto))
-
-# Escribir una función que tome un string y un carácter y devuelva el número de veces que aparece ese carácter en el string.
-
-# def contar_caracteres(texto:str, caracter:str)-> int:
-
-#     return texto.count(caracter)
-
-# texto = input("Texto: ")
-# caracter = input("Caracter: ")
-# print(contar_caracteres(texto, caracter))
-
- 
-# def contar_caracteres(texto:str, caracter:str)-> list:
-# Escribir una función que tome un string y un carácter y devuelva una lista con todas las palabras en el string que contienen ese carácter.
-#     lista = []
-#     for palabra in texto.split():
-#         if caracter in palabra:
-#             lista.append(palabra)
-#     return lista
-
-# texto = input("Texto: ")
-# caracter = input("Caracter: ")
-# print(contar_caracteres(texto, caracter))
-
-
-# def eliminar_espacios(texto:str)-> str:
-# Escribir una función que tome un string y devuelva el mismo string con los espacios eliminados
-#     return texto.replace(" ", "")
-
-# texto = input("Texto: ")
-# print(eliminar_espacios(texto))
-
-
-# def nombre_apellido(nombre:str, apellido:str)-> dict:
-# Escribir una función que reciba dos string (nombre y apellido) y devuelva un diccionario con el nombre y apellido, eliminando los espacios del comienzo y el final y colocando la primer letra en mayúscula
-#     diccionario = {}
-#     diccionario['nombre'] = nombre.replace(" ", "").capitalize()
-#     diccionario['apellido'] = apellido.replace(" ", "").capitalize()
+#8
+def nombre_apellido(nombre:str, apellido:str)-> dict:
+    diccionario = {}
+    diccionario['nombre'] = nombre.replace(" ", "").capitalize()
+    diccionario['apellido'] = apellido.replace(" ", "").capitalize()
     
-#     return diccionario
+    return diccionario
 
-# print(nombre_apellido("juan","carLOS"))
+#9
+def listar_nombres(lista:list)-> str:
+   
+    aux_cadena = ""
+    for item in lista:
+        aux_cadena = aux_cadena + item.capitalize() + "\n"
+    return aux_cadena
 
+#10
+def generar_email(nombre:str, apellido:str)-> str:
+    return nombre[0].lower() + "."+ apellido.lower() + "@utn-fra.com.ar"
 
-# def listar_nombres(lista:list)-> str:
-# Escribir una función que tome una lista de nombres y los una en una sola cadena separada por un salto de línea, por ejemplo: ["Juan", "María", "Pedro"] -> "Juan\nMaría\nPedro".
+#11
+def concatenar_palabras(lista:list)-> str:
+    aux_cadena = ""
+    for item in lista:
+        if item == lista[-1]:
+            aux_cadena = aux_cadena + "y " + item.capitalize()
+        else:
+            aux_cadena = aux_cadena + item.capitalize() + ", "
+    return aux_cadena
+
+#12
+def ocultar_numero(numeros:str)-> str:
+    retorno = ""
+    if numeros.isnumeric() or len(numeros) == 16:
+        retorno = "**** **** **** " + numeros[-4:]
+    else:
+        retorno = "Error, lo ingresado no son numeros o su longitud no es de  "
     
-#     aux_cadena = ""
-#     for item in lista:
-#         aux_cadena = aux_cadena + item.capitalize() + "\n"
-#     return aux_cadena
+    return retorno
 
-# lista = ["pablo","marcos","PEDRo"]
+#13
+def eliminar_mail(correo:str)-> str:
+    return correo.split("@")[0]
 
-# print(listar_nombres(lista))
+#14
 
-# Escribir una función que tome un nombre y un apellido y devuelva un email en formato "inicial_nombre.apellido@utn-fra.com.ar".
+def eliminar_dominio(url:str)-> str:
+    return url.split(".")[1]
 
-# def generar_email(nombre:str, apellido:str)-> str:
-#     return nombre[0].lower() + "."+ apellido.lower() + "@utn-fra.com.ar"
-
-# print(generar_email("Ignacio","MEDICI"))
-
-
-# Escribir una función que tome una lista de palabras y devuelva un string que contenga todas las palabras concatenadas con comas y "y" antes de la última palabra. Por ejemplo, si la lista es ["manzanas", "naranjas", "bananas"], el string resultante debería ser "manzanas, naranjas y bananas"..
-
-# def concatenar_palabras(lista:list)-> str:
-#     aux_cadena = ""
-#     for item in lista:
-#         if item == lista[-1]:
-#             aux_cadena = aux_cadena + "y " + item.capitalize()
-#         else:
-#             aux_cadena = aux_cadena + item.capitalize() + ", "
-#     return aux_cadena
-
-# lista = ["manzanas", "naranjas", "bananas","peras", "anana", "sandia"]
-
-# print(concatenar_palabras(lista))
-
-# Escribir una función que tome un número de tarjeta de crédito como input, verificar que todos los caracteres sean numéricos y devolver los últimos cuatro dígitos y los primeros dígitos como asteriscos, por ejemplo: "**** **** **** 1234". 
-
-
-# def ocultar_numero(numeros:str)-> str:
-#     retorno = ""
-#     if numeros.isnumeric() or len(numeros) == 16:
-#         retorno = "**** **** **** " + numeros[-4:]
-#     else:
-#         retorno = "Error, lo ingresado no son numeros o su longitud no es de  "
-    
-#     return retorno
-
-# numero = input("Ingrese los numeros de su tarjeta: ")
-# print(ocultar_numero(numero))
-
-# Escribir una función que tome un correo electrónico y elimine cualquier carácter después del símbolo @, por ejemplo: "usuario@gmail.com" -> "usuario".
-
-# def eliminar_mail(correo:str)-> str:
-#     return correo.split("@")[0]
-
-# print(eliminar_mail("i.medici@utn-fra.com"))
-
-# Escribir una función que tome una URL y devuelva solo el nombre de dominio, por ejemplo: "https://www.ejemplo.com.ar/pagina1" -> "ejemplo"..
-
-# def eliminar_dominio(url:str)-> str:
-#     return url.split(".")[1]
-
-# resultado = eliminar_dominio("https://www.youtube.com/")
-
-# print("El dominio de la url ingresada es: {0}".format(resultado))
-
-# Escribir una función que tome una cadena de texto y devuelva solo los caracteres alfabéticos, eliminando cualquier número o símbolo (sólo son válidos letras y espacios), por ejemplo: "H0l4, m4nd0!" -> "Hl mnd”
-
-# def eliminar_simbolos_y_numeros(texto:str)-> str:
-#     texto_formateado = ""
-#     for caracter in texto:
-#         if caracter.isalpha() or caracter.isspace():
-#             texto_formateado += caracter
-#     return texto_formateado
+#15
+def eliminar_simbolos_y_numeros(texto:str)-> str:
+    texto_formateado = ""
+    for caracter in texto:
+        if caracter.isalpha() or caracter.isspace():
+            texto_formateado += caracter
+    return texto_formateado
         
-# resultado = eliminar_simbolos_y_numeros("Hol@ como 3st@s?!")
+#16
+def acronimos_texto(texto:str)-> str:
+    texto_separado = texto.split(" ")
+    texto_retornado = ""
+    for text in texto_separado:
+        texto_retornado += text.capitalize()[0]
+    return texto_retornado
 
-# print(resultado)
-
-# Escribir una función que tome una cadena de texto y la convierta en un acrónimo, tomando la primera letra de cada palabra, por ejemplo: "Universidad Tecnológica Nacional Facultad Regional Avellaneda" -> "UTNFRA”.
-
-# def acronimos_texto(texto:str)-> str:
-#     texto_separado = texto.split(" ")
-#     texto_retornado = ""
-#     for text in texto_separado:
-#         texto_retornado += text.capitalize()[0]
-#     return texto_retornado
-
-# texto_completo = "Universidad Tecnológica Nacional Facultad Regional Avellaneda"
-# resultado = acronimos_texto(texto_completo)
-    
-# print("El acronimo de ""{0}"" es: {1}".format(texto_completo,resultado))
-
-# Escribir una función que tome un número binario y lo convierta en una cadena de 8 bits, rellenando con ceros a la izquierda si es necesario, por ejemplo: "101" -> "00000101".
-
+#17
 def rellenar_binario(nro_binario:str)-> str:
-    ceros = "0"* (8 - len(nro_binario))
+    ceros = "0" * (8 - len(nro_binario))
     return ceros + nro_binario
-print(rellenar_binario("101"))
-# Escribir una función que tome una cadena de caracteres y reemplace todas las letras mayúsculas por letras minúsculas y todas las letras minúsculas por letras mayúsculas, por ejemplo: "HoLa" -> "hOlA"
+
+#18
+def intercambiar_mayus_minus(cadena:str)-> str:
+    cadena_formateada = ""
+
+    for letra in cadena:
+        if letra.islower():
+            cadena_formateada += letra.upper()
+        else:
+            cadena_formateada += letra.lower()
+    return cadena_formateada
 
 
-# Escribir una función que tome una cadena de caracteres y cuente la cantidad de dígitos que contiene, por ejemplo: "1234 Hola Mundo" -> contiene 4 dígitos.
-
+#19
+def cantidad_digitos(cadena:str)-> int:
+    contador_digitos = 0
+    for caracter in cadena:
+        if caracter.isdigit():
+            contador_digitos += 1
+    return contador_digitos
 
 # Escribir una función que tome una lista de direcciones de correo electrónico y las una en una sola cadena separada por punto y coma, por ejemplo: ["juan@gmail.com", "maria@hotmail.com"] -> "juan@gmail.com;maria@hotmail.com".
+#20
+
 
 
 # Crear una función que reciba como parámetro un string y devuelva un diccionario donde cada clave es una palabra y cada valor es un entero que indica cuántas veces aparece esa palabra dentro del string.
+#21
+
+def imprimir_menu():
+
+    print("______________________________________________________________")
+    print("1) Todo a mayuscula")
+    print("2) Todo a minuscula")
+    print("3) Concatenar dos cadenas")
+    print("4) Cantidad de caracteres de la cadena")
+    print("5) Cantidad de veces que aparece un caracter en la cadena")
+    print("6) Palabras que contienen un caracter")
+    print("7) Eliminar espacios de la cadena")
+    print("8) Nombre y apellido en un diccionario")
+    print("9) Unir nombres en una cadena separada por un salto de linea")
+    print("10) Crear un email")
+    print("11) Palabras separadas por "","" e ""y""")
+    print("12) Ocultar numeros de tarjeta de credito")
+    print("13) Eliminar caracteres despues de @")
+    print("14) Nombre de dominio")
+    print("15) Caracteres alfabeticos")
+    print("16) Acrónimo")
+    print("17) Convertir a 8 bits")
+    print("18) Cambiar mayusculas por minusculas y viceversa")
+    print("19) Cantidad de digitos")
+    print("20) Unir emails en una cadena separada por ;")
+    print("21) Cantidad de veces que aparece una palabra")
+    print("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯")
+
+
+imprimir_menu()
+while True:
+
+    opcion = get_int("Ingrese una opcion: ","Error, el dato ingresado no es un numero valido")
+
+    match opcion:
+        case 1:
+            texto = get_string("Ingrese un texto: ","Error, dato invalido")
+            resultado = a_mayuscula(texto)
+
+            print("El texto en mayuscula es: {0}".format(resultado))
+        case 2:
+            texto = get_string("Ingrese un texto: ","Error, dato invalido")
+            resultado = a_minuscula(texto)
+            print("El texto en minuscula es: {0}".format(resultado))
+        case 3:
+            texto1 = get_string("Ingrese un texto: ","Error, dato invalido")
+            texto2 = get_string("Ingrese un texto: ","Error, dato invalido")
+            resultado = concatenar(texto1, texto2)
+            print("La cadena concatenada es: {0}".format(resultado))
+
+        case 4:
+            texto = get_string("Ingrese un texto: ","Error, dato invalido")
+            resultado = contar_caracteres(texto)
+            print("La cantidad de caracteres es: {0}".format(resultado))
+        case 5:
+            texto = get_string("Ingrese un texto: ","Error, dato invalido")
+            caracter = get_char("Ingresar caracter: ")
+            resultado = contar_caracteres_recurrentes(texto)
+            print("La cantidad de caracteres recurrentes es: {0}".format(resultado))
+        case 6:
+            texto = get_string("Ingrese un texto: ")
+            resultado = palabras_contenidas(texto)
+            print("Las palabras que contienen es: {0}".format(resultado))
+        case 7:
+            pass
+        case 8:
+            pass
+        case 9:
+            pass
+        case 10:
+            pass
+        case 11:
+            pass
+        case 12:
+            pass
+        case 13:
+            pass
+        case 14:
+            pass
+        case 15:
+            pass
+        case 16:
+            pass
+        case 17:
+            pass
+        case 18:
+            pass
+        case 19:
+            pass
+        case 20:
+            pass
+        case 21:
+            pass
+        case 22:
+            print("Saliendo..")
+            break
+        case _:
+            print("Opcion no valida")
