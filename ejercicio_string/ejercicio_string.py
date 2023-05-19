@@ -195,11 +195,20 @@ while True:
             resultado = palabras_contenidas(texto)
             print("Las palabras que contienen es: {0}".format(resultado))
         case 7:
-            pass
+            texto = get_string("Ingrese un texto: ", "Error, Dato invalido")
+            resultado = eliminar_espacios(texto)
+            print("El texto eliminado de espacios es: {0}".format(resultado))
         case 8:
-            pass
+            nombre = get_string("Ingrese su nombre: ", "Error, Dato invalido")
+            apellido = get_string("Ingrese su apellido: ", "Error, Dato invalido")
+            resultado = nombre_apellido(nombre, apellido)
+            print("El nombre y apellido en un diccionario es: {0}".format(resultado))
         case 9:
-            pass
+            lista_nombres = []
+            opcion = "si"
+            while opcion == "no":
+                lista_nombres.append(get_string("Ingrese un nombre: ", "Error, Dato invalido"))
+                opcion = get_string("Desea ingresar otro nombre? (si/no): ", "Error, opcion invalida")
         case 10:
             pass
         case 11:
