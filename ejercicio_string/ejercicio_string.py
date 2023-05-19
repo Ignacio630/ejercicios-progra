@@ -104,6 +104,10 @@ def acronimos_texto(texto:str)-> str:
 def rellenar_binario(nro_binario:str)-> str:
     ceros = "0" * (8 - len(nro_binario))
     return ceros + nro_binario
+<<<<<<< HEAD
+print(rellenar_binario("101"))
+# Escribir una función que tome una cadena de car   acteres y reemplace todas las letras mayúsculas por letras minúsculas y todas las letras minúsculas por letras mayúsculas, por ejemplo: "HoLa" -> "hOlA"
+=======
 
 #18
 def intercambiar_mayus_minus(cadena:str)-> str:
@@ -115,6 +119,7 @@ def intercambiar_mayus_minus(cadena:str)-> str:
         else:
             cadena_formateada += letra.lower()
     return cadena_formateada
+>>>>>>> dd9077cc9e8d8a2b7cc1f61f12c8eb171b4308b2
 
 
 #19
