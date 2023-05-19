@@ -175,7 +175,7 @@ def rellenar_binario(nro_binario:str)-> str:
     ceros = "0"* (8 - len(nro_binario))
     return ceros + nro_binario
 print(rellenar_binario("101"))
-# Escribir una función que tome una cadena de caracteres y reemplace todas las letras mayúsculas por letras minúsculas y todas las letras minúsculas por letras mayúsculas, por ejemplo: "HoLa" -> "hOlA"
+# Escribir una función que tome una cadena de car   acteres y reemplace todas las letras mayúsculas por letras minúsculas y todas las letras minúsculas por letras mayúsculas, por ejemplo: "HoLa" -> "hOlA"
 
 
 # Escribir una función que tome una cadena de caracteres y cuente la cantidad de dígitos que contiene, por ejemplo: "1234 Hola Mundo" -> contiene 4 dígitos.
