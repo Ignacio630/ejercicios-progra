@@ -9,7 +9,7 @@ def get_string(mensaje:str,mensaje_error:str)-> str:
             
             for char in dato:
                 if char.isalpha() or char.isspace():
-                    return dato.lower()
+                    return dato
                 else:
                     print(mensaje_error)
     
@@ -23,7 +23,7 @@ def get_char(mensaje:str,mensaje_error:str)-> chr:
         else:
             dato = get_string(mensaje,mensaje_error)
             if len(dato) == 1:
-                retorno_str = dato.lower()
+                retorno_str = dato
                 break
             
             else:
@@ -43,6 +43,25 @@ def get_int(mensaje:str,mensaje_error:str)-> int:
             
             if dato.isnumeric():
                 retorno_int = int(dato)
+                break
+            else:
+                print(mensaje_error)
+    
+    return retorno_int
+
+
+
+def get_int_str(mensaje:str,mensaje_error:str)-> int:
+    retorno_int = -1
+    while retorno_int == -1:
+        if isinstance(mensaje,str) != True or len(mensaje) == 0:
+            retorno_int = "No se ingreso un parametro valido"
+            break
+        else:
+            dato = input(mensaje)
+            
+            if dato.isnumeric():
+                retorno_int = dato
                 break
             else:
                 print(mensaje_error)

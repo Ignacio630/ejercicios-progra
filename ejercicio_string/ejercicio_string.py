@@ -56,24 +56,27 @@ def generar_email(nombre:str, apellido:str)-> str:
     return nombre[0].lower() + "."+ apellido.lower() + "@utn-fra.com.ar"
 
 #11
-def concatenar_palabras(lista:list)-> str:
+def listar_palabras(lista:list)-> str:
     aux_cadena = ""
-    for item in lista:
-        if item == lista[-1]:
-            aux_cadena = aux_cadena + "y " + item.capitalize()
-        else:
-            aux_cadena = aux_cadena + item.capitalize() + ", "
+    if len(lista) == 1:
+        aux_cadena = lista[0]
+    else:
+        for item in lista:
+            if item == lista[-1]:
+                aux_cadena = aux_cadena + "y " + item.capitalize()
+            else:
+                aux_cadena = aux_cadena + item.capitalize() + ", "
     return aux_cadena
 
 #12
 def ocultar_numero(numeros:str)-> str:
-    retorno = ""
-    if numeros.isnumeric() or len(numeros) == 16:
-        retorno = "**** **** **** " + numeros[-4:]
-    else:
-        retorno = "Error, lo ingresado no son numeros o su longitud no es de  "
-    
-    return retorno
+    numeros_ocultos = ""
+    ultimos_cuatro_numero = numeros[-4:]
+    for numero in numeros:
+        if numero.isdigit():
+            numeros_ocultos += "*"
+
+    return numeros_ocultos[:-4] + ultimos_cuatro_numero
 
 #13
 def eliminar_mail(correo:str)-> str:
@@ -104,22 +107,23 @@ def acronimos_texto(texto:str)-> str:
 def rellenar_binario(nro_binario:str)-> str:
     ceros = "0" * (8 - len(nro_binario))
     return ceros + nro_binario
-<<<<<<< HEAD
-print(rellenar_binario("101"))
+
 # Escribir una función que tome una cadena de car   acteres y reemplace todas las letras mayúsculas por letras minúsculas y todas las letras minúsculas por letras mayúsculas, por ejemplo: "HoLa" -> "hOlA"
-=======
+
 
 #18
-def intercambiar_mayus_minus(cadena:str)-> str:
+def intercambiar_mayus_minus(cadena: str) -> str:
     cadena_formateada = ""
 
     for letra in cadena:
-        if letra.islower():
+        if letra.isupper():
+            cadena_formateada += letra.lower()
+        elif letra.islower():
             cadena_formateada += letra.upper()
         else:
-            cadena_formateada += letra.lower()
+            cadena_formateada += letra
+
     return cadena_formateada
->>>>>>> dd9077cc9e8d8a2b7cc1f61f12c8eb171b4308b2
 
 
 #19
@@ -133,7 +137,18 @@ def cantidad_digitos(cadena:str)-> int:
 # Escribir una función que tome una lista de direcciones de correo electrónico y las una en una sola cadena separada por punto y coma, por ejemplo: ["juan@gmail.com", "maria@hotmail.com"] -> "juan@gmail.com;maria@hotmail.com".
 #20
 
+def mails_separados(lista_emails:list)-> str:
+    cadena = ""
 
+    if len(lista_emails) == 1:
+        cadena = lista_emails[0]
+    else:
+        for mail in lista_emails:
+            if mail == lista_emails[-1]:
+                cadena = cadena + mail
+            else:
+                cadena = cadena + mail + "; "
+    return cadena
 
 # Crear una función que reciba como parámetro un string y devuelva un diccionario donde cada clave es una palabra y cada valor es un entero que indica cuántas veces aparece esa palabra dentro del string.
 #21
@@ -162,12 +177,13 @@ def imprimir_menu():
     print("19) Cantidad de digitos")
     print("20) Unir emails en una cadena separada por ;")
     print("21) Cantidad de veces que aparece una palabra")
+    print("22) Salir")
     print("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯")
 
 
-imprimir_menu()
 while True:
-
+    
+    imprimir_menu()
     opcion = get_int("Ingrese una opcion: ","Error, el dato ingresado no es un numero valido")
 
     match opcion:
@@ -211,31 +227,67 @@ while True:
         case 9:
             lista_nombres = []
             opcion = "si"
-            while opcion == "no":
+            while opcion == "si":
                 lista_nombres.append(get_string("Ingrese un nombre: ", "Error, Dato invalido"))
                 opcion = get_string("Desea ingresar otro nombre? (si/no): ", "Error, opcion invalida")
+                if opcion == "no":
+                    opcion = get_string("Desea ingresar otro nombre? (si/no): ", "Error, opcion invalida")
+            resultado = listar_nombres(lista_nombres)
+            print(resultado)
         case 10:
-            pass
+            nombre = get_string("Ingrese su nombre: ","Error, dato invalido")
+            apellido = get_string("Ingrese su apellido: ","Error, dato invalido")
+            resultado = generar_email(nombre, apellido)
+            print("El email es: {0}".format(resultado))
         case 11:
-            pass
+            lista_palabras = []
+            
+            while True:
+                texto = get_string("Ingrese un texto: ", "Error, dato invalido")
+                lista_palabras.append(texto)
+            
+                opcion = get_string("Desea ingresar otro nombre? (si/no): ", "Error, opcion invalida")
+                    
+                if opcion == "no":
+                    break
+            resultado = listar_palabras(lista_palabras)
+            print("La lista es: {0}".format(resultado))
         case 12:
-            pass
+            tarjeta = get_int_str("Ingrese su numero de tarjeta: ", "Error, dato invalido")
+            resultado = ocultar_numero(tarjeta)
+            print("El numero de tarjeta oculto es: {0}".format(resultado))
         case 13:
-            pass
+            email = get_string("Ingrese su email: ", "Error, dato invalido")
+            resultado = eliminar_mail(email)
+            print("El texto sin el email es: {0}".format(resultado))
         case 14:
-            pass
+            url =  input("Ingrese su url")
+            resultado = eliminar_dominio(url)
+            print("El dominio es: {0}".format(resultado))
         case 15:
-            pass
+            texto = get_string("Ingrese un texto: ", "Error, dato invalido")
+            resultado = eliminar_simbolos_y_numeros(texto)
+            print("El texto sin numeros ni simbolos es: {0}".format(resultado))
         case 16:
-            pass
+            texto = get_string("Ingrese un texto: ", "Error, dato invalido")
+            resultado = acronimos_texto(texto)
+            print("El acronimo es: {0}".format(resultado))
         case 17:
-            pass
+            texto = get_string("Ingrese un texto: ", "Error, dato invalido")
+            resultado = cantidad_digitos(texto)
+            print("La cantidad de digitos es: {0}".format(resultado))
         case 18:
-            pass
+            texto = get_string("Ingrese un texto: ", "Error, dato invalido")
+            resultado = intercambiar_mayus_minus(texto)
+            print("El texto intercambiado es: {0}".format(resultado))
         case 19:
-            pass
+            texto = get_string("Ingrese un texto: ", "Error, dato invalido")
+            resultado = cantidad_digitos(texto)
+            print("La cantidad de digitos es: {0}".format(resultado))
         case 20:
-            pass
+            lista_emails = ["test@test.com","juan@gmail.com","maria@hotmail.com"]
+            resultado = mails_separados(lista_emails)
+            print("Los emails unidos son: {0}".format(resultado))
         case 21:
             pass
         case 22:
@@ -243,3 +295,4 @@ while True:
             break
         case _:
             print("Opcion no valida")
+
