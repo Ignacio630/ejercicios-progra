@@ -153,6 +153,17 @@ def mails_separados(lista_emails:list)-> str:
 # Crear una función que reciba como parámetro un string y devuelva un diccionario donde cada clave es una palabra y cada valor es un entero que indica cuántas veces aparece esa palabra dentro del string.
 #21
 
+def separar_clave_valor(texto:str)-> dict:
+    aux_dict_contador = {}
+    aux_lista_palabras = texto.split()
+    for palabra in aux_lista_palabras:
+        if palabra in aux_dict_contador:
+            aux_dict_contador[palabra] += 1
+        else:
+            aux_dict_contador[palabra] = 1
+    return aux_dict_contador
+
+
 def imprimir_menu():
 
     print("______________________________________________________________")
@@ -289,7 +300,9 @@ while True:
             resultado = mails_separados(lista_emails)
             print("Los emails unidos son: {0}".format(resultado))
         case 21:
-            pass
+            texto = get_string("Ingrese un texto: ", "Error, dato invalido")
+            resultado = separar_clave_valor(texto)
+            print("La cantidad de veces que aparece una palabra es: {0}".format(resultado))
         case 22:
             print("Saliendo..")
             break
