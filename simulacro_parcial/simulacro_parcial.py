@@ -9,14 +9,17 @@ def leer_archivo(nombre_archivo):
         lista_heroes = json.loads(contenido)
     return lista_heroes
 
-# almacenamos el archivo json en una variable
-data_stark = leer_archivo('simulacro_parcial\data_stark.json')
+def listar_heroes(lista:list):
+    lista_copia = lista.copy()
+    lista_atributos = []
+    
+    print("______________________________________________________________________________________________")
+    for key in lista[]:
+        lista_atributos.append(key)
+    print(lista_atributos)
+    # print("|{0}|{1}|{2}|{3}|{4}|{5}|{6}|{7}|{8}|{9}|".format(heroe["nombre"],heroe["identidad"],heroe["empresa"],heroe["altura"],heroe["peso"],heroe["genero"],heroe["color_ojos"],heroe["color_pelo"],heroe["fuerza"],heroe["inteligencia"]))
+    print("¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯")
 
-# almacenamos la lista heroes
-data_stark_lista = data_stark["lista_personajes"]
-
-
-def quick_sort(lista:list):
 
 
 def listar_cantidad_heroes(lista:list, cantidad_heroes:int)-> list:
@@ -69,32 +72,40 @@ def imprimir_menu():
 
 
 
+# almacenamos el archivo json en una variable
+data_stark = leer_archivo('simulacro_parcial\data_stark.json')
+
+# almacenamos la lista heroes
+data_stark_lista = data_stark["lista_personajes"]
 
 
-while True:
+listar_heroes(data_stark_lista)
+
+# while True:
     
-    imprimir_menu()
-    opcion = get_int("|->Ingrese una opcion: ","Error, opcion invalida")
-    if opcion == 1:
-        cantidad_heroes = get_int("Ingrese la cantidad de heroes que desea traer: ", "Error, el dato ingresado es incorrecto")
-        lista_heroes = listar_cantidad_heroes(data_stark_lista,cantidad_heroes)
-        # print(lista_heroes)
+#     imprimir_menu()
+#     opcion = get_int("|->Ingrese una opcion: ","Error, opcion invalida")
+#     if opcion == 1:
+#         cantidad_heroes = get_int("Ingrese la cantidad de heroes que desea traer: ", "Error, el dato ingresado es incorrecto")
+#         lista_heroes = listar_cantidad_heroes(data_stark_lista,cantidad_heroes)
+#         # print(lista_heroes)
 
-    elif opcion == 2:
-        lista =  ordenar_lista(data_stark_lista,"asc","altura")
-        # print(lista)
-        for h in lista:
-            print(h["nombre"],h["fuerza"])
-    elif opcion == 3:
-        pass 
-    elif opcion == 4:
-        pass 
-    elif opcion == 5:
-        pass 
-    elif opcion == 6:
-        pass 
-    elif opcion == 7:
-        print("Saliendo...")
-        break
-    
+#     elif opcion == 2:
+#         lista =  ordenar_lista(data_stark_lista,"asc","altura")
+#         # print(lista)
+#         for h in lista:
+#             print(h["nombre"],h["fuerza"])
+#     elif opcion == 3:
+#         pass 
+#     elif opcion == 4:
+#         pass 
+#     elif opcion == 5:
+#         pass 
+#     elif opcion == 6:
+#         pass 
+#     elif opcion == 7:
+#         print("Saliendo...")
+#         break
+#     else:
+#         print("Error, opcion invalida")
     
