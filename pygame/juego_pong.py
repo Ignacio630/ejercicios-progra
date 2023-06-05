@@ -52,7 +52,6 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
             print(event.pos)
-
     # Obtener el estado de las teclas presionadas
     pressed_keys = pygame.key.get_pressed()
 
@@ -76,8 +75,8 @@ while running:
     # dibujar formas
     jugador_1 = pygame.draw.rect(screen, white, (0, pos_j1, 10, 60))
     jugador_2 = pygame.draw.rect(screen, white, (790, pos_j2, 10, 60))
-    porteria_j1 = pygame.draw.line(screen, blue, (0, 0), (0, 500), 10)
-    porteria_j2 = pygame.draw.line(screen, red, (800, 500), (800, 0), 10)
+    porteria_j1 = pygame.draw.line(screen, white, (0, 0), (0, 500), 20)
+    porteria_j2 = pygame.draw.line(screen, white, (800, 500), (800, 0), 20)
     linea_central = pygame.draw.line(screen, white, (398, 0), (398, 500), 4)
     bola = pygame.draw.circle(screen, white, (pos_pelota_x, pos_pelota_y), 10)
 
@@ -85,7 +84,7 @@ while running:
 
     if pos_pelota_x > 790 or pos_pelota_x < 10 or jugador_1.colliderect(bola) or jugador_2.colliderect(bola):
         speed_x *= -1
-    if pos_pelota_y > 490 or pos_pelota_y < 10:
+    if pos_pelota_y > 490 or pos_pelota_y < 10 or jugador_1.colliderect(bola) or jugador_2.colliderect(bola):
         speed_y *= -1
 
     # contador puntos jugadores
@@ -103,7 +102,17 @@ while running:
 
     screen.blit(contador_j1, (295, 0))
     screen.blit(contador_j2, (405, 0))
+    
+    if puntos_j1 >= 10:
+        ganador = fuente.render("GANADOR JUGADOR 1", True, white)
+        screen.fill(black)
+        screen.blit(ganador, (300, 200))
 
+    elif puntos_j1 >= 10:
+        ganador = fuente.render("GANADOR JUGADOR 2", True, white)
+        screen.fill(black)
+        screen.blit(ganador, (400, 250))
+        
     # actualiza pantalla
     pygame.display.flip()
     clock.tick(120)
