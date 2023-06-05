@@ -19,7 +19,7 @@ white = (255, 255, 255)
 green = (0, 255, 0)
 red = (255, 0, 0)
 blue = (0, 0, 255)
-
+transparent = (0,0,0,128)
 # posicion jugadores
 pos_j1 = 220
 pos_j2 = 220
@@ -73,18 +73,18 @@ while running:
     # color de fondo
     screen.fill(black)
     # dibujar formas
+    porteria_j1 = pygame.draw.line(screen, black, (0, 0), (0, 500), 10)
+    porteria_j2 = pygame.draw.line(screen, black, (800, 500), (800, 0), 10)
     jugador_1 = pygame.draw.rect(screen, white, (0, pos_j1, 10, 60))
     jugador_2 = pygame.draw.rect(screen, white, (790, pos_j2, 10, 60))
-    porteria_j1 = pygame.draw.line(screen, white, (0, 0), (0, 500), 20)
-    porteria_j2 = pygame.draw.line(screen, white, (800, 500), (800, 0), 20)
     linea_central = pygame.draw.line(screen, white, (398, 0), (398, 500), 4)
     bola = pygame.draw.circle(screen, white, (pos_pelota_x, pos_pelota_y), 10)
 
     # Movimiento pelota
 
-    if pos_pelota_x > 790 or pos_pelota_x < 10 or jugador_1.colliderect(bola) or jugador_2.colliderect(bola):
+    if pos_pelota_x > 790 or pos_pelota_x < 10 or bola.colliderect(jugador_1) or bola.colliderect(jugador_2):
         speed_x *= -1
-    if pos_pelota_y > 490 or pos_pelota_y < 10 or jugador_1.colliderect(bola) or jugador_2.colliderect(bola):
+    if pos_pelota_y > 490 or pos_pelota_y < 10:
         speed_y *= -1
 
     # contador puntos jugadores
@@ -108,7 +108,7 @@ while running:
         screen.fill(black)
         screen.blit(ganador, (300, 200))
 
-    elif puntos_j1 >= 10:
+    elif puntos_j2 >= 10:
         ganador = fuente.render("GANADOR JUGADOR 2", True, white)
         screen.fill(black)
         screen.blit(ganador, (400, 250))
