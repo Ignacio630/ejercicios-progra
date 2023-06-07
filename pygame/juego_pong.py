@@ -6,6 +6,7 @@ pygame.init()
 # tamaño pantalla
 height = 800
 width = 500
+center = (width/2,height/2)
 #
 size = (height, width)
 screen = pygame.display.set_mode(size)
@@ -74,14 +75,16 @@ while running:
         FPS = 100
     elif pressed_keys[pygame.K_LALT]:
         FPS = 30
+
+
     pos_pelota_x += speed_x
     pos_pelota_y += speed_y
 
     # color de fondo
     screen.fill(black)
     # dibujar formas
-    porteria_j1 = pygame.draw.rect(screen, white, (0, 0, 5, 800))
-    porteria_j2 = pygame.draw.rect(screen, red, (0, 0, 5, 800))
+    porteria_j2 = pygame.draw.rect(screen, black, (0, 0, 5, 800))
+    porteria_j1 = pygame.draw.rect(screen, black, (height-5,0, 5, 800))
     jugador_1 = pygame.draw.rect(screen, white, (0, pos_j1, 10, 60))
     jugador_2 = pygame.draw.rect(screen, white, (790, pos_j2, 10, 60))
     linea_central = pygame.draw.line(screen, white, (398, 0), (398, 500), 4)
@@ -107,22 +110,22 @@ while running:
 
     # contador puntos jugadores
     contador_j1 = fuente.render(
-        "Jugador 1: {0:.0f}".format(puntos_j1), True, white)
+        "{0:.0f}".format(puntos_j1), True, white)
     contador_j2 = fuente.render(
-        "Jugador 2: {0:.0f}".format(puntos_j2), True, white)
+        "{0:.0f}".format(puntos_j2), True, white)
 
-    screen.blit(contador_j1, (295, 0))
-    screen.blit(contador_j2, (405, 0))
+    screen.blit(contador_j1, (382,250))
+    screen.blit(contador_j2, (406, 250))
 
-    if puntos_j1 >= 10:
+    if puntos_j1 >= 1:
         ganador = fuente.render("GANADOR JUGADOR 1", True, white)
         screen.fill(black)
-        screen.blit(ganador, (300, 200))
+        screen.blit(ganador, center)
 
-    elif puntos_j2 >= 10:
+    elif puntos_j2 >= 1:
         ganador = fuente.render("GANADOR JUGADOR 2", True, white)
         screen.fill(black)
-        screen.blit(ganador, (400, 250))
+        screen.blit(ganador, center)
 
     # actualiza pantalla
     pygame.display.flip()

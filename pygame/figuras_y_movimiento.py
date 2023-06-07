@@ -85,4 +85,4 @@ while running:
         obj_1_cord_x = ancho - 100
 
     pygame.display.flip()
-    tiempo.tick(60)
+    tiempo.tick(60) 
