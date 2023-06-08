@@ -72,11 +72,9 @@ while running:
         pos_j2 += 5
 
     if pressed_keys[pygame.K_SPACE]:
-        FPS = 100
+        FPS = 120
     elif pressed_keys[pygame.K_LALT]:
-        FPS = 30
-
-
+        FPS = 150
     pos_pelota_x += speed_x
     pos_pelota_y += speed_y
 
@@ -117,15 +115,15 @@ while running:
     screen.blit(contador_j1, (382,250))
     screen.blit(contador_j2, (406, 250))
 
-    if puntos_j1 >= 1:
+    if puntos_j1 >= 5:
         ganador = fuente.render("GANADOR JUGADOR 1", True, white)
         screen.fill(black)
-        screen.blit(ganador, center)
+        screen.blit(ganador, (width/2 + 50, 200))
 
-    elif puntos_j2 >= 1:
+    elif puntos_j2 >= 5:
         ganador = fuente.render("GANADOR JUGADOR 2", True, white)
         screen.fill(black)
-        screen.blit(ganador, center)
+        screen.blit(ganador, (width/2 + 50, 250))
 
     # actualiza pantalla
     pygame.display.flip()
