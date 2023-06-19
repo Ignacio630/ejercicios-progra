@@ -22,16 +22,16 @@ class Personaje:
     def __init__(self,path,size,postion) -> None:
         self.posicion_inicial = postion
         self.frame = 0
-        self.animation = getFrameSprite(path,9,6,1)
-        self.image = self.animation[self.frame]
-        self.rect = self.image.get_rect()
         self.life = 100
         self.score = 0
         self.move_x = 0
         self.move_y = 0
 
+        self.animation = getFrameSprite(path,9,6,1)
+        self.image = self.animation[self.frame]
+        self.rect = self.image.get_rect()
 
-    def input(self,x=0,y=0):
+    def control(self,x=0,y=0):
         self.move_x = x
         self.move_y = y
         
@@ -43,10 +43,20 @@ class Personaje:
             self.frame = 0
         
         self.rect.x += self.move_x
-        self.rect.y -= self.move_y
-        
+        self.rect.y += self.move_y
 
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_UP]:
+            self.control(0,-10)
+        elif keys[pygame.K_DOWN]:
+            self.control(0,10)
+        elif keys[pygame.K_LEFT]:
+            self.control(-10,0)
+        elif keys[pygame.K_RIGHT]:
+            self.control(10,0)
+        else:
+            self.control(0,0)    
     def draw(self,pantalla):
         self.image = self.animation[self.frame]
-        self.rect = self.image.get_rect()
         pantalla.blit(self.image,self.rect)
