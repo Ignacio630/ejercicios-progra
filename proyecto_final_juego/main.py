@@ -1,18 +1,22 @@
 import pygame
-from constatenes import *
-from jugadores import Personaje
+from constantes import *
+from jugador import Jugador
+from mapa import Mapa
 
 pantalla = pygame.display.set_mode((ANCHO_PANTALLA,ALTO_PANTALLA))
+
 pygame.init()
+
 tiempo = pygame.time.Clock()
-imagen_fondo = pygame.image.load("{0}fondo.png".format(PATH_RECURSOS))
-tick_1s = pygame.USEREVENT + 0
 esta_corriendo = True
-player1 = Personaje("{0}character.png".format(PATH_RECURSOS),(100,0),(0,0))
+#Instancias de objetos
+player1 = Jugador("{0}stay_frames.png".format(PATH_JUGADOR),60,5,10,20,20,(1250,150))
+mapa_1 = Mapa("{0}fondo.png".format(PATH_FONDO))
 
 
+# bucle principal
 while esta_corriendo:
-    tiempo.tick(FPS)
+    delta_ms = tiempo.tick(FPS)
     keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -21,9 +25,12 @@ while esta_corriendo:
             print(event.pos)    
     
     #Update jugador, enemigo, mapa, etc
-    player1.update()
-    pantalla.blit(imagen_fondo,(0,0))
+    pantalla.blit(mapa_1.draw(),(0,0))
+
+    player1.input(keys)
+    player1.update(delta_ms)
     player1.draw(pantalla)
+    
     pygame.display.flip()
     
 pygame.quit()
