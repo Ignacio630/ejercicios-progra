@@ -12,7 +12,7 @@ esta_corriendo = True
 lista_plataformas = []
 
 #Instancias de objetos
-player1 = Jugador("{0}stay_frames.png".format(PATH_JUGADOR),60,5,10,40,10,(1250,150))
+player1 = Jugador(path="{0}stay_frames.png".format(PATH_JUGADOR),frame_rate=60,speed_walk=5,speed_run=10,jump_power=40,jump_height=30,gravity=10,size=(1250,150))
 mapa_1 = Mapa("{0}fondo.png".format(PATH_FONDO))
 
 lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),400,260,800,800,0))
@@ -34,8 +34,7 @@ while esta_corriendo:
     for plataforma in lista_plataformas:
         plataforma.draw(pantalla)
     
-    player1.input(keys)
-    player1.jump(keys)
+    player1.inputs(keys)
     player1.update(delta_ms)
     player1.draw(pantalla)
 
