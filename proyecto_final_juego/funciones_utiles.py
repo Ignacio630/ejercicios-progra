@@ -18,3 +18,4 @@ def getSurfaceFromSprites(path:str,columnas:int,filas:int,step:int,flag_flip:boo
                 surface_frame = pygame.transform.flip(surface_frame,True,False)
             lista_frames.append(surface_frame)
     return lista_frames
+

@@ -2,17 +2,21 @@ import pygame
 from constantes import *
 from jugador import Jugador
 from mapa import Mapa
-
+from plataformas import Plataforma
 pantalla = pygame.display.set_mode((ANCHO_PANTALLA,ALTO_PANTALLA))
 
 pygame.init()
 
 tiempo = pygame.time.Clock()
 esta_corriendo = True
+lista_plataformas = []
+
 #Instancias de objetos
-player1 = Jugador("{0}stay_frames.png".format(PATH_JUGADOR),60,5,10,20,20,(1250,150))
+player1 = Jugador("{0}stay_frames.png".format(PATH_JUGADOR),60,5,10,40,10,(1250,150))
 mapa_1 = Mapa("{0}fondo.png".format(PATH_FONDO))
 
+lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),400,260,800,800,0))
+lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),460,260,800,800,0))
 
 # bucle principal
 while esta_corriendo:
@@ -27,10 +31,14 @@ while esta_corriendo:
     #Update jugador, enemigo, mapa, etc
     pantalla.blit(mapa_1.draw(),(0,0))
 
+    for plataforma in lista_plataformas:
+        plataforma.draw(pantalla)
+    
     player1.input(keys)
+    player1.jump(keys)
     player1.update(delta_ms)
     player1.draw(pantalla)
-    
+
     pygame.display.flip()
     
 pygame.quit()

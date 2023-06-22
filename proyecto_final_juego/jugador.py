@@ -43,6 +43,14 @@ class Jugador:
             self.animation = self.stay_frames
             self.frame = 0
             self.move_x = 0
+    
+    def jump(self,keys):
+        if keys[pygame.K_SPACE]:
+            self.move_y = -self.jump_power
+            self.animation = self.walk_frame_r
+        else:
+            self.move_y = 0
+
     def update(self,delta_ms):
         self.tiempo_transcurrido += delta_ms    
         if (self.tiempo_transcurrido >= 200):
@@ -61,3 +69,5 @@ class Jugador:
     def draw(self,screen):
         self.imagen_jugador = self.animation[self.frame]
         screen.blit(self.imagen_jugador,self.rect_jugador)
+        if(DEBUG):
+            pygame.draw.rect(screen,R,self.rect_jugador,3)
