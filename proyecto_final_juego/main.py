@@ -12,11 +12,11 @@ esta_corriendo = True
 lista_plataformas = []
 
 #Instancias de objetos
-player1 = Jugador(path="{0}stay_frames.png".format(PATH_JUGADOR),frame_rate=60,speed_walk=5,speed_run=10,jump_power=40,jump_height=30,gravity=10,size=(1250,150))
+player1 = Jugador(path="{0}stay_frames.png".format(PATH_JUGADOR),frame_rate=60,speed_walk=5,speed_run=10,jump_power=40,jump_height=30,gravity=10)
 mapa_1 = Mapa("{0}fondo.png".format(PATH_FONDO))
 
-lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),400,260,800,800,0))
-lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),460,260,800,800,0))
+lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),400,260,0,TAMANIO_PLATAFORMA))
+lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),460,260,0,TAMANIO_PLATAFORMA))
 
 # bucle principal
 while esta_corriendo:
@@ -27,17 +27,16 @@ while esta_corriendo:
             esta_corriendo = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print(event.pos)    
+    player1.inputs(keys)    
     
     #Update jugador, enemigo, mapa, etc
     pantalla.blit(mapa_1.draw(),(0,0))
 
     for plataforma in lista_plataformas:
         plataforma.draw(pantalla)
-    
-    player1.inputs(keys)
+
     player1.update(delta_ms)
     player1.draw(pantalla)
-
     pygame.display.flip()
     
 pygame.quit()

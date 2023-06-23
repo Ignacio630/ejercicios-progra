@@ -2,10 +2,9 @@ import pygame
 from constantes import *
 
 
-def getSurfaceFromSprites(path:str,columnas:int,filas:int,step:int,flag_flip:bool,size:tuple):
+def getSurfaceFromSprites(path:str,columnas:int,filas:int,step:int,flag_flip:bool):
     lista_frames = []
     surface_sprite = pygame.image.load(path)
-    surface_sprite = pygame.transform.scale(surface_sprite,size)
     ancho_frame = (surface_sprite.get_width()/columnas)
     alto_frame = (surface_sprite.get_height()/filas)
 
