@@ -1,6 +1,18 @@
 import pygame
 from constantes import *
 
+def getSurfaceFromSeparateSprite(path:str,frames:int,flag_flip:bool,size:tuple):
+    lista_frames = []   
+
+    for frame in range(0,frames):
+        surface_sprite = pygame.image.load("{0}{1}.png".format(path,frame))
+        surface_sprite = pygame.transform.scale(surface_sprite,size)
+        if flag_flip:
+            surface_sprite = pygame.transform.flip(surface_sprite,True,False)
+        lista_frames.append(surface_sprite)
+    return lista_frames
+
+
 
 def getSurfaceFromSprites(path:str,columnas:int,filas:int,step:int,flag_flip:bool,size:tuple):
     lista_frames = []
@@ -18,4 +30,3 @@ def getSurfaceFromSprites(path:str,columnas:int,filas:int,step:int,flag_flip:boo
                 surface_frame = pygame.transform.flip(surface_frame,True,False)
             lista_frames.append(surface_frame)
     return lista_frames
-
