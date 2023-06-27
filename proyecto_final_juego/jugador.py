@@ -35,6 +35,7 @@ class Jugador:
         self.move_y = 0
         self.collition_ground = pygame.Rect(self.rect_jugador.x,self.rect_jugador.bottom,self.rect_jugador.w,self.rect_jugador.h)
         self.tiempo_transcurrido = 0
+
     #quieto
     def stay(self):
         if self.direction:
