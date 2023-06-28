@@ -2,16 +2,13 @@ import pygame
 from settings import *
 
 
-class Plataforma:
+class Plataforma(pygame.sprite.Sprite):
     def __init__(self,pos,size) -> None:
-        self.pos = pos
-        self.size = size
-        self.imagen = pygame.surface.Surface((size,size))
-        self.imagen.fill(R)
-        self.rect = self.imagen.get_rect(topleft = pos)
-    
-    def draw(self,screen):
-        screen.blit(self.imagen ,self.rect)
+        super().__init__()
+        self.image = pygame.surface.Surface((size,size))
+        self.image.fill(R)
+        self.rect = self.image.get_rect(topleft = pos)
+
 
 
 
