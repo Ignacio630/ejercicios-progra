@@ -13,7 +13,7 @@ lista_plataformas = []
 
 #Instancias de objetos
 player1 = Jugador(path=PATH_JUGADOR,frame_rate=60,speed_walk=5,speed_run=10,jump_power=30,jump_height=200,gravity=10,size=(100,175))
-mapa_1 = Mapa("{0}fondo.png".format(PATH_FONDO))
+mapa_1 = Mapa("{0}fondo.png".format(PATH_FONDO),0,0)
 lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),400,260,800,800,0))
 lista_plataformas.append(Plataforma("{0}plataformas.png".format(PATH_FONDO),460,260,800,800,0))
 
@@ -27,7 +27,6 @@ while esta_corriendo:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             print(event.pos)   
     #movimientos jugador 
-    player1.inputs(keys)
     
  
     #Update jugador, enemigo, mapa, etc
@@ -37,6 +36,8 @@ while esta_corriendo:
         plataforma.draw(pantalla)
     
     player1.update(delta_ms)
+
+    player1.inputs(keys)
 
     player1.draw(pantalla)
 

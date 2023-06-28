@@ -10,7 +10,7 @@ DEBUG = False
 
 #definimos la direccion de la carpeta con los recursos
 
-PATH_RECURSOS = "proyecto_final_juego/recursos"
+PATH_RECURSOS = "recursos"
 PATH_SPRITES = "{0}/sprites/".format(PATH_RECURSOS)
 PATH_ENEMIGO = "{0}enemigo/".format(PATH_SPRITES)
 PATH_JUGADOR = "{0}jugador/".format(PATH_SPRITES)
