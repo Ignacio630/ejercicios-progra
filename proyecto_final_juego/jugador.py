@@ -79,12 +79,8 @@ class Jugador:
     def inputs(self,keys):
         self.stay()
         self.move_x = 0
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] and not self.is_jumping:
             self.jump()     
-        else:
-            self.is_jumping = False
-            self.stay()
-            self.move_y = 0
             
         if keys[pygame.K_RIGHT]:
             self.direction = True
@@ -115,22 +111,19 @@ class Jugador:
             else:
                 self.frame = 0
 
-            # print(self.start_jump)
-            # print(self.rect_jugador.bottom)
-            # print(self.start_jump - self.rect_jugador.bottom)
-        print(self.is_jumping)
         if (self.start_jump - self.rect_jugador.bottom) == self.jump_height:
             self.move_y = 0
         
         self.rect_jugador.x += self.move_x
         self.rect_jugador.y += self.move_y
-
-
         
 
+        
         if(self.rect_jugador.bottom < 500):
             self.rect_jugador.y += self.gravity
 
+        if self.start_jump == self.rect_jugador.bottom:
+            self.is_jumping = False
 
     def draw(self,screen):
         if self.frame < len(self.animation):
