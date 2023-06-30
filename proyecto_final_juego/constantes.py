@@ -1,12 +1,8 @@
-
-#definimos las dimensiones iniciales de la pantalla
-ANCHO_PANTALLA = 990
-ALTO_PANTALLA = 600
 #fotogramas por segundo del juego
 FPS = 60    
 
 #debug
-DEBUG = False
+DEBUG = True
 
 #definimos la direccion de la carpeta con los recursos
 
@@ -32,16 +28,23 @@ B = (255,255,255)
 
 DIRECCION = True
 
+platform_size = 60
+
 level_map = [
     '                                  ',
-    '                                  ',
+    'E                                 ',
     'XXXX      XX             XX       ',
     'XXXX      XX                      ',
     'XXXXXX                        XX  ',
     'XXXXXX           XX               ',
-    'XX             XX                 ',
-    '          X  XXXX      XX  XX     ',
+    'XX             XX            E    ',
+    '          X  XXXX      XX  XXXX   ',
     '          X  XXXX      XX  XXXX   ',
     '   P    XXX  XXXXXXXX  XX  XXXX   ',
     'XXXXXXXXXXX  XXXXXXXX  XX  XXXX   '
 ]
+
+#definimos las dimensiones iniciales de la pantalla
+ANCHO_PANTALLA = 990
+ALTO_PANTALLA = platform_size * (len(level_map))
+

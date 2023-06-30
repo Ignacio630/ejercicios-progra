@@ -4,7 +4,7 @@ from funciones_utiles import *
 
 
 class Jugador:
-    def __init__(self,path,frame_rate,speed_walk,speed_run,jump_power,jump_height,gravity,size) -> None:
+    def __init__(self,path,frame_rate,speed_walk,speed_run,jump_power,jump_height,gravity,size,pos) -> None:
         self.stay_frames_r = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_STAND),9,False,size)
         self.stay_frames_l = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_STAND),9,True,size)
         self.walk_frame_r = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_WALK),6,False,size)
@@ -19,10 +19,9 @@ class Jugador:
         self.frame = 0
         self.animation = self.stay_frames_r
         self.imagen_jugador = self.animation[self.frame]
-        self.rect_jugador = self.imagen_jugador.get_rect()
+        self.rect_jugador = self.imagen_jugador.get_rect(topleft = pos)
 
         self.direction = DIRECCION
-        self.frame_rt = frame_rate
         self.speed_walk = speed_walk
         self.speed_run = speed_run
         self.jump_power = jump_power
@@ -33,7 +32,6 @@ class Jugador:
         self.gravity = gravity
         self.move_x = 0
         self.move_y = 0
-        self.collition_ground = pygame.Rect(self.rect_jugador.x,self.rect_jugador.bottom,self.rect_jugador.w,self.rect_jugador.h)
         self.tiempo_transcurrido = 0
 
     #quieto
@@ -63,6 +61,7 @@ class Jugador:
         if not self.is_jumping :
             self.start_jump = self.rect_jugador.bottom
             self.move_y -= self.jump_power
+            self.move_x = self.speed_walk
             self.frame = 0
             self.is_jumping = True
     #ataque
@@ -119,7 +118,7 @@ class Jugador:
         
 
         
-        if(self.rect_jugador.bottom < 500):
+        if(self.rect_jugador.bottom < ALTO_PANTALLA):
             self.rect_jugador.y += self.gravity
 
         if self.start_jump == self.rect_jugador.bottom:
@@ -133,5 +132,4 @@ class Jugador:
 
         if(DEBUG):
             pygame.draw.rect(screen,R,self.rect_jugador,3)
-            pygame.draw.rect(screen,R,self.collition_ground,3)
         screen.blit(self.imagen_jugador,self.rect_jugador)
