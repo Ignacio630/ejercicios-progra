@@ -2,7 +2,6 @@ import pygame
 from constantes import *
 from jugador import Jugador
 from mapa import Mapa
-from plataformas import Plataforma
 from enemigo import Enemy
 pantalla = pygame.display.set_mode((ANCHO_PANTALLA,ALTO_PANTALLA))
 

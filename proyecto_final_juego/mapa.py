@@ -2,7 +2,6 @@ import pygame
 from constantes import * 
 from  jugador import Jugador
 from enemigo import Enemy
-from plataformas import Plataforma
 
 
 class Mapa:
@@ -21,14 +20,7 @@ class Mapa:
                 y = row_index * platform_size
 
                 if item == "X":
-                    platform = Plataforma("{0}plataformas.png".format(PATH_FONDO),x=x,y=y,type=0)
-                    print(platform)
-
+                    pass
     def draw(self,screen):
         screen.blit(self.background,self.rect)
 
-
-
-mapa = Mapa(ANCHO_PANTALLA,ALTO_PANTALLA,level_map)
-
-mapa.draw_level()
