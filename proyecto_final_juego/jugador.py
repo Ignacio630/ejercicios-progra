@@ -4,7 +4,7 @@ from funciones_utiles import *
 
 
 class Jugador:
-    def __init__(self,path,frame_rate,speed_walk,speed_run,jump_power,jump_height,gravity,size,pos) -> None:
+    def __init__(self,path,speed_walk,speed_run,jump_power,jump_height,gravity,size,pos) -> None:
         self.stay_frames_r = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_STAND),9,False,size)
         self.stay_frames_l = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_STAND),9,True,size)
         self.walk_frame_r = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_WALK),6,False,size)
@@ -75,9 +75,10 @@ class Jugador:
         else:
             self.is_attacking = False    
 
-    def inputs(self,keys):
+    def inputs(self):
         self.stay()
         self.move_x = 0
+        keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE] and not self.is_jumping:
             self.jump()     
             
@@ -130,6 +131,4 @@ class Jugador:
         else:
             self.frame = 0
 
-        if(DEBUG):
-            pygame.draw.rect(screen,R,self.rect_jugador,3)
         screen.blit(self.imagen_jugador,self.rect_jugador)

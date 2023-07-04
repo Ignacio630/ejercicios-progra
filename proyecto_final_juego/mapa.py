@@ -2,25 +2,29 @@ import pygame
 from constantes import * 
 from  jugador import Jugador
 from enemigo import Enemy
-
+from plataformas import Plataforma
 
 class Mapa:
-    def __init__(self,width,height,level_design) -> None:
+    def __init__(self,level_design,screen) -> None:
         self.platforms_list = []
-        self.level_design = level_design
-        self.background = pygame.surface.Surface((width,height))
-        self.background.fill(B)
-        self.rect = self.background.get_rect()
+        self.player = ''
+        self.screen = screen
+        self.setup_map(level_design)
 
-    def draw_level(self):
-        
-        for column_index,column in enumerate(self.level_design):
-            for row_index,item in enumerate(column):
+    
+    def setup_map(self,level_map):
+        for row_index,item in enumerate(level_map):
+            for column_index,column in enumerate(item):
                 x = column_index * platform_size
                 y = row_index * platform_size
+                if column == "X":
+                    plataforma = Plataforma((x,y),platform_size)
+                    self.platforms_list.append(plataforma)
+                if column == "P":
+                    self.player = Jugador(path=PATH_JUGADOR,speed_walk=5,speed_run=10,jump_power=30,jump_height=300,gravity=10,size=(100,175),pos=(x,y))
+                    
+    def draw(self):
+        # for platform in self.platforms_list:
+        #     platform.draw(self.screen)
 
-                if item == "X":
-                    pass
-    def draw(self,screen):
-        screen.blit(self.background,self.rect)
-
+        self.player.draw(self.screen)

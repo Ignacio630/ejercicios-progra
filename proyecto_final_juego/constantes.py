@@ -32,7 +32,7 @@ platform_size = 60
 
 level_map = [
     '                                  ',
-    'E                                 ',
+    'E                        P        ',
     'XXXX      XX             XX       ',
     'XXXX      XX                      ',
     'XXXXXX                        XX  ',
@@ -40,11 +40,11 @@ level_map = [
     'XX             XX            E    ',
     '          X  XXXX      XX  XXXX   ',
     '          X  XXXX      XX  XXXX   ',
-    '   P    XXX  XXXXXXXX  XX  XXXX   ',
+    '        XXX  XXXXXXXX  XX  XXXX   ',
     'XXXXXXXXXXX  XXXXXXXX  XX  XXXX   '
 ]
 
 #definimos las dimensiones iniciales de la pantalla
 ANCHO_PANTALLA = 990
-ALTO_PANTALLA = platform_size * (len(level_map))
+ALTO_PANTALLA = len(level_map) * platform_size
 
