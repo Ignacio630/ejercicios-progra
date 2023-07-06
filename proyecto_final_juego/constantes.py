@@ -1,5 +1,5 @@
 #fotogramas por segundo del juego
-FPS = 60    
+FPS = 60   
 
 #debug
 DEBUG = True

@@ -4,7 +4,7 @@ from funciones_utiles import *
 
 
 class Jugador:
-    def __init__(self,path,speed_walk,speed_run,jump_power,jump_height,gravity,size,pos) -> None:
+    def __init__(self,path,speed_walk,speed_run,jump_power,gravity,size,pos) -> None:
         self.stay_frames_r = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_STAND),9,False,size)
         self.stay_frames_l = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_STAND),9,True,size)
         self.walk_frame_r = getSurfaceFromSeparateSprite("{0}{1}".format(path,PATH_WALK),6,False,size)
@@ -20,85 +20,52 @@ class Jugador:
         self.animation = self.stay_frames_r
         self.imagen_jugador = self.animation[self.frame]
         self.rect_jugador = self.imagen_jugador.get_rect(topleft = pos)
-
-        self.direction = DIRECCION
-        self.speed_walk = speed_walk
-        self.speed_run = speed_run
-        self.jump_power = jump_power
-        self.jump_height = jump_height
-        self.start_jump = 0
-        self.is_attacking = False
-        self.is_jumping = False
-        self.gravity = gravity
-        self.move_x = 0
-        self.move_y = 0
         self.tiempo_transcurrido = 0
 
-    #quieto
+        #movimiento
+        self.animation_direction = DIRECCION
+        self.direction = pygame.math.Vector2(0,0)
+        self.walk_speed = speed_walk
+        self.gravity = gravity
+        self.jump_power = jump_power
+
+
     def stay(self):
-        if self.direction:
+        if self.animation_direction:
             self.animation = self.stay_frames_r
         else:
             self.animation = self.stay_frames_l
-    #caminar izq-der
-    def walk(self,direccion):
-        if direccion:
-            self.move_x = self.speed_walk
+
+    def walk(self,direction):
+        if direction:
+            self.direction.x = 1
             self.animation = self.walk_frame_r
         else:
-            self.move_x = -self.speed_walk
+            self.direction.x = -1
             self.animation = self.walk_frame_l
-    #correr
-    def run(self,direccion):
-        if direccion:
-            self.move_x = self.speed_run
-            self.animation = self.run_frame_r
-        else:
-            self.move_x = -self.speed_run
-            self.animation = self.run_frame_l
-    #saltar
-    def jump(self):
-        if not self.is_jumping :
-            self.start_jump = self.rect_jugador.bottom
-            self.move_y -= self.jump_power
-            self.move_x = self.speed_walk
-            self.frame = 0
-            self.is_jumping = True
-    #ataque
-    def attack(self):
-        if not self.is_attacking:
-            if self.direction:
-                self.animation = self.attack_frame_r
-            else:
-                self.animation = self.attack_frame_l
-            self.is_attacking = True
-        else:
-            self.is_attacking = False    
 
+    def jump(self,direction):
+        self.direction.y = self.jump_power
+    
+    def apply_gravity(self):
+        self.direction.y += self.gravity
+        self.rect_jugador.y += self.direction.y
+        
     def inputs(self):
         self.stay()
-        self.move_x = 0
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_SPACE] and not self.is_jumping:
-            self.jump()     
-            
-        if keys[pygame.K_RIGHT]:
-            self.direction = True
-            self.walk(self.direction)
-        
-        if keys[pygame.K_LEFT]:
-            self.direction = False
-            self.walk(self.direction)
-        
-        if keys[pygame.K_RIGHT] and keys[pygame.K_LSHIFT]: 
-            self.direction = True
-            self.run(self.direction)
 
-        if keys[pygame.K_LEFT] and keys[pygame.K_LSHIFT]:
-            self.run(self.direction)
-        
-        if keys[pygame.K_z]:
-            self.attack()
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_RIGHT]:
+            self.animation_direction = True
+            self.walk(self.animation_direction)
+        elif keys[pygame.K_LEFT]:
+            self.animation_direction = False
+            self.walk(self.animation_direction)
+        else:
+            self.direction.x = 0
+
+        if keys[pygame.K_SPACE]:
+            self.jump(self.animation_direction)
 
     def update(self,delta_ms): 
         self.inputs()
@@ -110,21 +77,7 @@ class Jugador:
                 self.frame += 1
             else:
                 self.frame = 0
-
-        #Salto
-        if (self.start_jump - self.rect_jugador.bottom) == self.jump_height:
-            self.move_y = 0
         
-        self.rect_jugador.x += self.move_x
-        self.rect_jugador.y += self.move_y
-        
-
-
-        if(self.rect_jugador.bottom < ALTO_PANTALLA):
-            self.rect_jugador.y += self.gravity
-
-        if self.start_jump == self.rect_jugador.bottom:
-            self.is_jumping = False
 
     def draw(self,screen):
         if self.frame < len(self.animation):
@@ -132,4 +85,6 @@ class Jugador:
         else:
             self.frame = 0
 
+        if DEBUG:
+            pygame.draw.rect(self.imagen_jugador,R,self.rect_jugador)
         screen.blit(self.imagen_jugador,self.rect_jugador)

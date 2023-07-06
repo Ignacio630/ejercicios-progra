@@ -7,37 +7,66 @@ from plataformas import Plataforma
 class Mapa:
     def __init__(self,level_design,screen) -> None:
         self.platforms_list = []
-        self.player = ''
         self.screen = screen
         self.setup_map(level_design)
         self.world_move_x = 0
-
+        self.limit_left = []
     
     def setup_map(self,level_map):
-        for row_index,item in enumerate(level_map):
-            for column_index,column in enumerate(item):
-                x = column_index * platform_size
-                y = row_index * platform_size
-                if column == "X":
+
+        for column_index,column in enumerate(level_map):
+            for row_index,row in enumerate(column):
+                x = row_index * platform_size
+                y = column_index * platform_size
+                if row == "X":
                     plataforma = Plataforma((x,y),platform_size)
                     self.platforms_list.append(plataforma)
-                if column == "P":
-                    self.player = Jugador(path=PATH_JUGADOR,speed_walk=5,speed_run=10,jump_power=30,jump_height=300,gravity=10,size=(50,90),pos=(x,y))
-    
+                if row == "P":
+                    self.player = Jugador(path=PATH_JUGADOR,speed_walk=5,speed_run=10,jump_power=-16,gravity=0.8,size=(50,90),pos=(x,y))
+                if column[0]:
+                    self.limit_left.append(column[0])
+
 
     def colliders_player_x(self):
-        pass
+        player = self.player
+        player.rect_jugador.x += player.direction.x * player.walk_speed
+
+        for platform in self.platforms_list:
+            if platform.rect.colliderect(player.rect_jugador):
+                if player.direction.x < 0:
+                    player.rect_jugador.left = platform.rect.right
+                elif player.direction.x > 0:
+                    player.rect_jugador.right = platform.rect.left
+                    
+    def colliders_player_y(self):
+        player = self.player
+        player.apply_gravity()
+
+        for platform in self.platforms_list:
+            if platform.rect.colliderect(player.rect_jugador):
+                if player.direction.y < 0:
+                    player.rect_jugador.top = platform.rect.bottom
+                    player.direction.y = 0
+                elif player.direction.y > 0:
+                    player.rect_jugador.bottom = platform.rect.top                
+                    player.direction.y = 0
+        # if player.rect_jugador.bottom == ALTO_PANTALLA:
+
+
 
     def move_world_player(self):
-        if self.player.rect_jugador.centerx < ANCHO_PANTALLA/5 and self.player.move_x < 0:
+        direction_x = self.player.direction.x
+
+        if self.player.rect_jugador.centerx < ANCHO_PANTALLA/5 and direction_x < 0:
             self.world_move_x = 5
-            self.player.move_x = 0
-        elif self.player.rect_jugador.centerx > ANCHO_PANTALLA -(ANCHO_PANTALLA/5) and self.player.move_x > 0:
+            self.player.walk_speed = 0
+        elif self.player.rect_jugador.centerx > ANCHO_PANTALLA -(ANCHO_PANTALLA/5) and direction_x > 0:
             self.world_move_x = -5
-            self.player.move_x = 0
+            self.player.walk_speed = 0
         else:
             self.world_move_x = 0
-            self.player.speed_walk = 5
+            self.player.walk_speed = 5
+
 
     def draw(self,delta_ms):
         
@@ -49,11 +78,12 @@ class Mapa:
             platform.update(self.world_move_x)
             platform.draw(self.screen)
         
-
-
-        #jugador
-        self.player.inputs()
         self.move_world_player()
 
+        print(self.limit_left)
+
+        #jugador
         self.player.update(delta_ms)
+        self.colliders_player_x()
+        self.colliders_player_y()
         self.player.draw(self.screen)

@@ -21,9 +21,9 @@ mapa_1 = Mapa(level_map,pantalla)
 
 # bucle principal
 while esta_corriendo:
-    delta_ms = tiempo.tick(FPS)
+    delta_ms = tiempo.tick(FPS)  
     keys = pygame.key.get_pressed() 
-    for event in pygame.event.get():
+    for event in pygame.event.get(): 
         if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
             esta_corriendo = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -36,4 +36,4 @@ while esta_corriendo:
 
     pygame.display.flip()
     
-pygame.quit()
+pygame.quit()   
