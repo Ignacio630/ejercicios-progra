@@ -22,7 +22,7 @@ mapa_1 = Mapa(level_map,pantalla)
 # bucle principal
 while esta_corriendo:
     delta_ms = tiempo.tick(FPS)
-    keys = pygame.key.get_pressed()
+    keys = pygame.key.get_pressed() 
     for event in pygame.event.get():
         if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
             esta_corriendo = False
@@ -32,8 +32,8 @@ while esta_corriendo:
  
     #Update jugador, enemigo, mapa, etc
     
-    mapa_1.draw()
+    mapa_1.draw(delta_ms)
 
     pygame.display.flip()
     
-pygame.quit() 
+pygame.quit()

@@ -21,30 +21,32 @@ PATH_FONDO = "{0}/fondo/".format(PATH_RECURSOS)
 R = (255,0,0)
 G = (0,255,0)
 B = (0,0,255)
-W = (0,0,0)
-B = (255,255,255)
+B = (0,0,0)
+W = (255,255,255)
 
 #direccion
 
 DIRECCION = True
 
-platform_size = 60
+platform_size = 50
+
 
 level_map = [
-    '                                  ',
-    'E                        P        ',
-    'XXXX      XX             XX       ',
-    'XXXX      XX                      ',
-    'XXXXXX                        XX  ',
-    'XXXXXX           XX               ',
-    'XX             XX            E    ',
-    '          X  XXXX      XX  XXXX   ',
-    '          X  XXXX      XX  XXXX   ',
-    '        XXX  XXXXXXXX  XX  XXXX   ',
-    'XXXXXXXXXXX  XXXXXXXX  XX  XXXX   '
+    '                               ',
+    '                               ',
+    '                               ',
+    'E                              ',
+    'XXXX      XX             XX    ',
+    'XXXX      XX                   ',
+    'XXXXXX                       XX',
+    'XXXXXX      P    XX            ',
+    'XX             XX            E ',
+    '          X  XXXX      XX  XXXX',
+    '          X  XXXX      XX  XXXX',
+    '        XXX  XXXXXXXX  XX  XXXX',
+    'XXXXXXXXXXX  XXXXXXXX  XX  XXXX'
 ]
 
 #definimos las dimensiones iniciales de la pantalla
-ANCHO_PANTALLA = 990
+ANCHO_PANTALLA = 1200
 ALTO_PANTALLA = len(level_map) * platform_size
-

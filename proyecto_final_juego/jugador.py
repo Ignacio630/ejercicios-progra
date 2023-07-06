@@ -96,14 +96,14 @@ class Jugador:
 
         if keys[pygame.K_LEFT] and keys[pygame.K_LSHIFT]:
             self.run(self.direction)
-            print("asd")
         
         if keys[pygame.K_z]:
             self.attack()
 
     def update(self,delta_ms): 
+        self.inputs()
+        #Aplicar animacion
         self.tiempo_transcurrido += delta_ms    
-        
         if (self.tiempo_transcurrido >= 200):
             self.tiempo_transcurrido = 0
             if(self.frame < len(self.animation)-1):
@@ -111,6 +111,7 @@ class Jugador:
             else:
                 self.frame = 0
 
+        #Salto
         if (self.start_jump - self.rect_jugador.bottom) == self.jump_height:
             self.move_y = 0
         
@@ -118,7 +119,7 @@ class Jugador:
         self.rect_jugador.y += self.move_y
         
 
-        
+
         if(self.rect_jugador.bottom < ALTO_PANTALLA):
             self.rect_jugador.y += self.gravity
 
