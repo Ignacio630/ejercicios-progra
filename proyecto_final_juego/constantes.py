@@ -50,3 +50,13 @@ level_map = [
 #definimos las dimensiones iniciales de la pantalla
 ANCHO_PANTALLA = 1200
 ALTO_PANTALLA = len(level_map) * platform_size
+
+
+
+#JUGADOR
+
+ANCHO_JUGADOR = 0
+ALTO_JUGADOR = 0
+
+SPEED_WALK = 10
+SPEED_RUN = SPEED_WALK * 1.20 
