@@ -27,7 +27,7 @@ while esta_corriendo:
         if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
             esta_corriendo = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            print(event.pos)   
+            print(event.pos)
   
  
     #Update jugador, enemigo, mapa, etc
