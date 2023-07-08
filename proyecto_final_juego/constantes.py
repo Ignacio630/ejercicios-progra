@@ -32,18 +32,18 @@ platform_size = 50
 
 
 level_map = [
-    'L                             L',
-    'L                             L',
-    'L                             L',
-    'L                             L',
+    'X                             L',
+    'X                             L',
+    'X                             L',
+    'X                             L',
     'XXXX      XX             XX   L',
     'XXXX      XX                  L',
     'XXXXXX                      XXL',
     'XXXXXX           XX           L',
     'XX             XX            EL',
-    'L         X  XXXX      XX  XXXX',
-    'L         X  XXXX      XX  XXXX',
-    'L    P  XXX  XXXXXXXX  XX  XXXX',
+    'X         X  XXXX      XX  XXXX',
+    'X         X  XXXX      XX  XXXX',
+    'X    P  XXX  XXXXXXXX  XX  XXXX',
     'XXXXXXXXXXX  XXXXXXXX  XX  XXXX'
 ]
 
