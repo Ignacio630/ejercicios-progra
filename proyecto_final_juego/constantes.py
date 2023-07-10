@@ -16,6 +16,9 @@ PATH_RUN = "run/"
 PATH_JUMP = "jump/"
 PATH_ATTACK = "attack/"
 PATH_FONDO = "{0}/fondo/".format(PATH_RECURSOS)
+PATH_TERRENO = "{0}terreno/".format(PATH_FONDO)
+PATH_AGUA = "{0}agua/".format(PATH_FONDO)
+PATH_PLATAFORMA = "{0}plataforma/".format(PATH_FONDO)
 #colores
 
 R = (255,0,0)
@@ -32,19 +35,20 @@ platform_size = 50
 
 
 level_map = [
-    'X                             L',
-    'X                             L',
-    'X                             L',
-    'X                             L',
-    'XXXX      XX             XX   L',
-    'XXXX      XX                  L',
-    'XXXXXX                      XXL',
-    'XXXXXX           XX           L',
-    'XX             XX            EL',
-    'X         X  XXXX      XX  XXXX',
-    'X         X  XXXX      XX  XXXX',
-    'X    P  XXX  XXXXXXXX  XX  XXXX',
-    'XXXXXXXXXXX  XXXXXXXX  XX  XXXX'
+    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+    'X                            X',
+    'X                            X',
+    'X                            X',
+    'X                            X',
+    'X                            X',
+    'X                            X',
+    'X                            X',
+    'X                            X',
+    'X          L   E    L        X',
+    'X           XXXXXXXX         X',
+    'X                            X',
+    'X    P                       X',
+    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
 ]
 
 #definimos las dimensiones iniciales de la pantalla
@@ -58,5 +62,5 @@ ALTO_PANTALLA = len(level_map) * platform_size
 ANCHO_JUGADOR = 0
 ALTO_JUGADOR = 0
 
-SPEED_WALK = 10
+SPEED_WALK = 4
 SPEED_RUN = SPEED_WALK * 1.20 

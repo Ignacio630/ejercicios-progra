@@ -13,8 +13,8 @@ esta_corriendo = True
 lista_plataformas = []
 
 #Instancias de objetos
-# player1 = Jugador(path=PATH_JUGADOR,speed_walk=5,speed_run=10,jump_power=30,jump_height=300,gravity=10,size=(100,175))
-enemy = Enemy(size=40,pos=(500,500),move_x=10,gravity=10)
+# player1 = Jugador(path=PATH_JUGADOR,speed_walk=5,speed_run=10,jump_potwer=30,jump_height=300,gravity=10,size=(100,175))
+# enemy = Enemy(size=40,pos=(500,500),move_x=10,gravity=10)
 mapa_1 = Mapa(level_map,pantalla)
 
 
@@ -31,7 +31,7 @@ while esta_corriendo:
  
     #Update jugador, enemigo, mapa, etc
     
-    mapa_1.draw(delta_ms)
+    mapa_1.run(delta_ms)
 
     pygame.display.flip()
     

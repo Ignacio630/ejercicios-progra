@@ -1,14 +1,15 @@
 import pygame 
 from constantes import * 
-from  jugador import Jugador
+from jugador import Jugador
 from enemigo import Enemy
 from plataformas import Plataforma
-from limits import *
+
 
 class Mapa:
     def __init__(self,level_design,screen) -> None:
         self.platforms_list = []
         self.limits_list = []
+        self.enemy_list = []
         self.screen = screen    
         self.setup_map(level_design)
         self.world_move_x = 0
@@ -20,26 +21,31 @@ class Mapa:
                 x = row_index * platform_size
                 y = column_index * platform_size
                 if row == "X":
-                    plataforma = Plataforma((x,y),platform_size)
+                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frames=1)
                     self.platforms_list.append(plataforma)
+                if row == "L":
+                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frames=1)
+                    self.limits_list.append(plataforma)
                 if row == "P":
                     self.player = Jugador(path=PATH_JUGADOR,speed_walk=SPEED_WALK,speed_run=SPEED_RUN,jump_power=-16,jump_height=200,gravity=0.8,size=(50,90),pos=(x,y))
-                if row == "L":
-                    limite = Limits(platform_size,(x,y),self.screen)
-                    self.limits_list.append(limite)
+                if row == "E":
+                    enemy = Enemy(platform_size,(x,y))
+                    self.enemy_list.append(enemy)
+                    
 
-    def colliders_player_x(self):
-        player = self.player
+    def colliders_player_x(self,player):
         player.rect_jugador.x += player.direction_movement.x
-
+        
         for platform in self.platforms_list:
             if platform.rect.colliderect(player.rect_jugador):
                 if player.direction_movement.x < 0:
                     player.rect_jugador.left = platform.rect.right
+                    player.direction_movement.x = 0
                 elif player.direction_movement.x > 0:
                     player.rect_jugador.right = platform.rect.left
+                    player.direction_movement.x = 0
                     
-    def colliders_player_y(self):
+    def colliders_player_y(self,player):
         player = self.player
         player.apply_gravity()
 
@@ -51,37 +57,47 @@ class Mapa:
                 elif player.direction_movement.y > 0:
                     player.rect_jugador.bottom = platform.rect.top                
                     player.direction_movement.y = 0
-
-    def player_camara(self):
-        direction_x = self.player.direction_movement.x
-
-        if self.player.rect_jugador.centerx < ANCHO_PANTALLA/5 and direction_x < 0:
-            self.world_move_x = 5
-            self.player.walk_speed = 0
-        elif self.player.rect_jugador.centerx > ANCHO_PANTALLA -(ANCHO_PANTALLA/5) and direction_x > 0:
-            self.world_move_x = -5
-            self.player.walk_speed = 0
+            
+    def player_camara(self,player):
+        if player.direction_movement.x < 0:
+            self.world_move_x = SPEED_WALK
+            player.walk_speed = 0
+        elif player.direction_movement.x > 0:
+            self.world_move_x = -SPEED_WALK
+            player.walk_speed = 0
         else:
             self.world_move_x = 0
-            self.player.walk_speed = 5
-
-
-    def draw(self,delta_ms):
+            player.walk_speed = SPEED_WALK
+    
+    def enemy_movement(self,limit,speed,world_speed):
+        enemy_list = self.enemy_list
+        for enemy in enemy_list:
+            enemy.speed = 3
+            enemy.rect_enemy.x += world_speed + enemy.speed
+            if enemy.rect_enemy.right == limit.rect.left:
+                enemy.speed = -speed
+            elif enemy.rect_enemy.left == limit.rect.right:
+                enemy.speed = speed
+            
+    def run(self,delta_ms):
         #fondo
         self.screen.fill(W)
         #mundo
         for platform in self.platforms_list:
             platform.update(self.world_move_x)
             platform.draw(self.screen)
-
-        for limits in self.limits_list:
-            limits.draw()
             
-        self.player_camara()
 
+        for enemy in self.enemy_list:
+            enemy.draw(self.screen)
 
+        for limit in self.limits_list:
+            self.enemy_movement(limit,1,self.world_move_x)
+            limit.update(self.world_move_x)
+            limit.draw(self.screen)
         #jugador
+        self.player_camara(self.player)
         self.player.update(delta_ms)
-        self.colliders_player_x()
-        self.colliders_player_y()
+        self.colliders_player_x(self.player)
+        self.colliders_player_y(self.player)
         self.player.draw(self.screen)

@@ -1,12 +1,11 @@
 import pygame
 from constantes import * 
-from funciones_utiles import getSurfaceFromSprites
+from funciones_utiles import *
 
 class Plataforma:
 
-    def __init__(self,pos,size,type) -> None:
-        self.surface = getSurfaceFromSprites(path="{0}plataformas.png".format(PATH_FONDO),columnas=12,filas=12,step=True,size=size)[type]
-        self.surface.fill(R)
+    def __init__(self,pos,size,path,flag,frames) -> None:
+        self.surface = getSurfaceFromSeparateSprite(path=path,frames=frames,flag_flip=flag,size=(size,size))[0]
         self.rect = self.surface.get_rect(topleft = pos)
 
     def update(self,world_speed_x):
