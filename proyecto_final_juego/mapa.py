@@ -20,11 +20,20 @@ class Mapa:
             for row_index,row in enumerate(column):
                 x = row_index * platform_size
                 y = column_index * platform_size
-                if row == "X":
-                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frames=1)
+                if row == "C":
+                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frame=0)
+                    self.platforms_list.append(plataforma)
+                if row == "D":
+                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frame=2)
+                    self.platforms_list.append(plataforma)
+                if row == "I":
+                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frame=1)
+                    self.platforms_list.append(plataforma)
+                if row == "T":
+                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frame=4)
                     self.platforms_list.append(plataforma)
                 if row == "L":
-                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frames=1)
+                    plataforma = Plataforma((x,y),platform_size,path="{0}".format(PATH_TERRENO),flag=True,frame=1)
                     self.limits_list.append(plataforma)
                 if row == "P":
                     self.player = Jugador(path=PATH_JUGADOR,speed_walk=SPEED_WALK,speed_run=SPEED_RUN,jump_power=-16,jump_height=200,gravity=0.8,size=(50,90),pos=(x,y))
@@ -69,14 +78,15 @@ class Mapa:
             self.world_move_x = 0
             player.walk_speed = SPEED_WALK
     
-    def enemy_movement(self,limit,speed,world_speed):
+    def enemy_movement(self,limit,speed):
         enemy_list = self.enemy_list
         for enemy in enemy_list:
-            enemy.speed = 3
-            enemy.rect_enemy.x += world_speed + enemy.speed
             if enemy.rect_enemy.right == limit.rect.left:
-                enemy.speed = -speed
+                print(enemy.rect_enemy.right,limit.rect.left)
+                enemy.speed = speed
             elif enemy.rect_enemy.left == limit.rect.right:
+                enemy.speed = speed
+            else:
                 enemy.speed = speed
             
     def run(self,delta_ms):
@@ -89,10 +99,11 @@ class Mapa:
             
 
         for enemy in self.enemy_list:
+            enemy.update(self.world_move_x)
             enemy.draw(self.screen)
 
         for limit in self.limits_list:
-            self.enemy_movement(limit,1,self.world_move_x)
+            self.enemy_movement(limit,10)
             limit.update(self.world_move_x)
             limit.draw(self.screen)
         #jugador

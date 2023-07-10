@@ -128,3 +128,6 @@ class Jugador:
             self.frame = 0
 
         screen.blit(self.imagen_jugador,self.rect_jugador)
+        
+        if DEBUG:
+            pygame.draw.rect(screen,R,self.rect_jugador,1)

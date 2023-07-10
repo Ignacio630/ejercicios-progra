@@ -30,8 +30,9 @@ W = (255,255,255)
 #direccion
 
 DIRECCION = True
+DEBUG = True
 
-platform_size = 50
+platform_size = 52
 
 
 level_map = [
@@ -45,10 +46,12 @@ level_map = [
     'X                            X',
     'X                            X',
     'X          L   E    L        X',
-    'X           XXXXXXXX         X',
+    'X         PIPPPPPPPPPD       X',
     'X                            X',
     'X    P                       X',
-    'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    'ICCCCCCCCCCCCCCCCCCCCCCCCCCCCD',
+    'ITTTTTTTTTTTTTTTTTTTTTTTTTTTTD'
+
 ]
 
 #definimos las dimensiones iniciales de la pantalla
