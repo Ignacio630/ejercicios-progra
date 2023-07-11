@@ -22,16 +22,15 @@ while esta_corriendo:
     for event in event_list: 
         if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
             esta_corriendo = False
-        # elif event.type == pygame.MOUSEBUTTONDOWN:
-        #     print(event.pos)
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            print(event.pos)
         # menu.update(event=event)
 
     #Update jugador, enemigo, mapa, etc
     # mapa_1.run(delta_ms)
     # menu.draw(event=event)
     if main_menu.active:
-        main_menu.update(event_list=event_list)
-        main_menu.draw()
+        main_menu.draw(event_list)
 
     pygame.display.flip()
     

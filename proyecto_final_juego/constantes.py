@@ -58,7 +58,6 @@ level_map = [
 #definimos las dimensiones iniciales de la pantalla
 ANCHO_PANTALLA = 1200
 ALTO_PANTALLA = len(level_map) * platform_size
-
 #form map
 #Menu
 ANCHO_MENU = ANCHO_PANTALLA/2
