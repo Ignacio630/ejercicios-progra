@@ -5,10 +5,10 @@ class Widget:
 
     def __init__(self,screen,w,h,x,y) -> None:
         self.main_screen = screen
-        self.widht = w
-        self.height = h
-        self.pos_x = x
-        self.pos_y = y
+        self.w = w
+        self.h = h
+        self.x = x
+        self.y = y
         
 
     def draw(self):

@@ -64,7 +64,7 @@ ALTO_PANTALLA = len(level_map) * platform_size
 ANCHO_MENU = ANCHO_PANTALLA/2
 ALTO_MENU = ALTO_PANTALLA
 
-setup_main_menu = ["title","new_game","load_game","options","exit"]
+SETUP_MAIN_MENU = ["title","new_game","load_game","options","exit"]
 
 #JUGADOR
 

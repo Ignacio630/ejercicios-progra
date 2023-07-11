@@ -1,7 +1,6 @@
 import pygame
 from constantes import *
-from gui_boton import Button
-
+from gui_main_menu import Main_menu
 pantalla = pygame.display.set_mode((ANCHO_PANTALLA,ALTO_PANTALLA))
 
 pygame.init()
@@ -9,13 +8,18 @@ pygame.init()
 tiempo = pygame.time.Clock()
 esta_corriendo = True
 
-boton_1 = Button(screen=pantalla,w=200,h=50,x=0,y=0,path=PATH_MENU,image_name="new_game",event="click",event_type="click")
+def event(event_type):
+    print(event_type)
+
+main_menu = Main_menu(name="main_menu",main_screen=pantalla,x=ANCHO_PANTALLA/4,y=0,w=ANCHO_MENU,h=ALTO_MENU,path=PATH_MENU,image_name="0",active=True,setup_menu=SETUP_MAIN_MENU)
+
 
 # bucle principal
 while esta_corriendo:
     delta_ms = tiempo.tick(FPS)  
     keys = pygame.key.get_pressed() 
-    for event in pygame.event.get(): 
+    event_list = pygame.event.get()
+    for event in event_list: 
         if event.type == pygame.QUIT or keys[pygame.K_ESCAPE]:
             esta_corriendo = False
         # elif event.type == pygame.MOUSEBUTTONDOWN:
@@ -25,9 +29,9 @@ while esta_corriendo:
     #Update jugador, enemigo, mapa, etc
     # mapa_1.run(delta_ms)
     # menu.draw(event=event)
-
-    boton_1.update()
-    boton_1.draw()
+    if main_menu.active:
+        main_menu.update(event_list=event_list)
+        main_menu.draw()
 
     pygame.display.flip()
     
