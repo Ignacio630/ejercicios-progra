@@ -7,6 +7,7 @@ DEBUG = True
 #definimos la direccion de la carpeta con los recursos
 
 PATH_RECURSOS = "recursos"
+PATH_MENU = "{0}/menu/".format(PATH_RECURSOS)
 PATH_SPRITES = "{0}/sprites/".format(PATH_RECURSOS)
 PATH_ENEMIGO = "{0}enemigo/".format(PATH_SPRITES)
 PATH_JUGADOR = "{0}jugador/".format(PATH_SPRITES)
@@ -46,7 +47,7 @@ level_map = [
     'X                            X',
     'X                            X',
     'X          L   E    L        X',
-    'X         PIPPPPPPPPPD       X',
+    'X           PPPPPPPP         X',
     'X                            X',
     'X    P                       X',
     'ICCCCCCCCCCCCCCCCCCCCCCCCCCCCD',
@@ -58,7 +59,12 @@ level_map = [
 ANCHO_PANTALLA = 1200
 ALTO_PANTALLA = len(level_map) * platform_size
 
+#form map
+#Menu
+ANCHO_MENU = ANCHO_PANTALLA/2
+ALTO_MENU = ALTO_PANTALLA
 
+setup_main_menu = ["title","new_game","load_game","options","exit"]
 
 #JUGADOR
 

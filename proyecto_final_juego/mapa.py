@@ -3,8 +3,8 @@ from constantes import *
 from jugador import Jugador
 from enemigo import Enemy
 from plataformas import Plataforma
-
-
+from menu_principal import Menu_princial
+from menu_boton import Boton
 class Mapa:
     def __init__(self,level_design,screen) -> None:
         self.platforms_list = []
@@ -13,7 +13,6 @@ class Mapa:
         self.screen = screen    
         self.setup_map(level_design)
         self.world_move_x = 0
-    
     def setup_map(self,level_map):
 
         for column_index,column in enumerate(level_map):
@@ -77,18 +76,7 @@ class Mapa:
         else:
             self.world_move_x = 0
             player.walk_speed = SPEED_WALK
-    
-    def enemy_movement(self,limit,speed):
-        enemy_list = self.enemy_list
-        for enemy in enemy_list:
-            if enemy.rect_enemy.right == limit.rect.left:
-                print(enemy.rect_enemy.right,limit.rect.left)
-                enemy.speed = speed
-            elif enemy.rect_enemy.left == limit.rect.right:
-                enemy.speed = speed
-            else:
-                enemy.speed = speed
-            
+
     def run(self,delta_ms):
         #fondo
         self.screen.fill(W)
@@ -97,15 +85,15 @@ class Mapa:
             platform.update(self.world_move_x)
             platform.draw(self.screen)
             
-
-        for enemy in self.enemy_list:
-            enemy.update(self.world_move_x)
-            enemy.draw(self.screen)
-
         for limit in self.limits_list:
-            self.enemy_movement(limit,10)
             limit.update(self.world_move_x)
             limit.draw(self.screen)
+            
+        for enemy in self.enemy_list:
+            # enemy.enemy_movement(self.limits_list)
+            enemy.update(self.world_move_x,self.limits_list,True)
+            enemy.draw(self.screen)
+
         #jugador
         self.player_camara(self.player)
         self.player.update(delta_ms)
