@@ -1,22 +1,16 @@
 import pygame
 from constantes import *
-from jugador import Jugador
-from mapa import Mapa
-from enemigo import Enemy
-from menu_principal import Menu_princial
+from gui_boton import Button
+
 pantalla = pygame.display.set_mode((ANCHO_PANTALLA,ALTO_PANTALLA))
 
 pygame.init()
 
 tiempo = pygame.time.Clock()
 esta_corriendo = True
-lista_plataformas = []
 
-#Instancias de objetos
-# player1 = Jugador(path=PATH_JUGADOR,speed_walk=5,speed_run=10,jump_potwer=30,jump_height=300,gravity=10,size=(100,175))
-# enemy = Enemy(size=40,pos=(500,500),move_x=10,gravity=10)
-mapa_1 = Mapa(level_map,pantalla)
-menu = Menu_princial(screen=pantalla)
+boton_1 = Button(screen=pantalla,w=200,h=50,x=0,y=0,path=PATH_MENU,image_name="new_game",event="click",event_type="click")
+
 # bucle principal
 while esta_corriendo:
     delta_ms = tiempo.tick(FPS)  
@@ -26,11 +20,14 @@ while esta_corriendo:
             esta_corriendo = False
         # elif event.type == pygame.MOUSEBUTTONDOWN:
         #     print(event.pos)
-        menu.draw(event=event)
+        # menu.update(event=event)
 
     #Update jugador, enemigo, mapa, etc
     # mapa_1.run(delta_ms)
-    menu.draw()
+    # menu.draw(event=event)
+
+    boton_1.update()
+    boton_1.draw()
 
     pygame.display.flip()
     

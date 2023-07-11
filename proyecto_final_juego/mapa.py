@@ -4,7 +4,7 @@ from jugador import Jugador
 from enemigo import Enemy
 from plataformas import Plataforma
 from menu_principal import Menu_princial
-from menu_boton import Boton
+from gui_boton import Boton
 class Mapa:
     def __init__(self,level_design,screen) -> None:
         self.platforms_list = []
